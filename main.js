@@ -5,24 +5,49 @@
 
 function init() {
   console.log("Initialising...");
-  sidebarManager();
+
 }; init();
 
 
 function toggleSidebar() {
   if (mini) {
-    console.log("opening sidebar");
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("mySidebar").style.width = "200px";
+    var icon_texts = document.getElementsByClassName("icon-text");
+    for (var i = 0; i < icon_texts.length; i++) {
+      icon_texts[i].style.display = "initial";
+    }
+    document.getElementById("main").style.marginLeft = "200px";
     this.mini = false;
   } else {
-    console.log("closing sidebar");
-    document.getElementById("mySidebar").style.width = "85px";
-    document.getElementById("main").style.marginLeft = "85px";
+    // SHOULD COME UP WITH A BETTER SOLUTION TO GROUP MOVE MULTIPLES
+    document.getElementById("mySidebar").style.width = "60px";
+    var icon_texts = document.getElementsByClassName("icon-text");
+    document.getElementById("main").style.marginLeft = "60px";
+    document.getElementById("navbar").style.marginLeft = "60px";
     this.mini = true;
+    for (var i = 0; i < icon_texts.length; i++) {
+      icon_texts[i].style.display = "none";
+    }
   }
 }
 
+function appendContainer(id,container) {
+  var curContainer = document.getElementById(container);
+  curContainer.style.display = "initial";
+  console.debug("id: " + id)
+  $(".material-icons").removeClass("icon-selected")
+  switch(id) {
+    case "sidebar-Home":
+      document.getElementById("icon-Home").classList.add("icon-selected");
+    break;
+    case "sidebar-About":
+      document.getElementById("icon-About").classList.add("icon-selected");
+    break;
+    case "sidebar-Settings":
+      document.getElementById("icon-Settings").classList.add("icon-selected");
+
+  }
+}
 
 function generateChart(nodeName, data) {
   var currentNode = document.createElement("canvas");

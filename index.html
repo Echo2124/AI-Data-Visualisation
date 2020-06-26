@@ -2,6 +2,7 @@
 
 <html>
   <head>
+      <title>AI Visualisation</title>
       <!-- CSS only -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -14,23 +15,29 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <p class="text-center">In what ways does artificial intellgience improve the quality of life for the average person?</p>
+
+    <nav id="navbar" class="navbar text-center navbar-expand-lg navbar-dark bg-dark">
+      <div class="container text-center">
+        <h6 id="question-text" class="text-light">In what ways does Artificial Intelligence improve the quality of life for the average person?</h6>
       </div>
     </nav>
 
-    <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">
-      <a href="#"><span><i class="material-icons">home</i><span class="icon-text">Home</span></a><br>
-      <a href="#"><i class="material-icons">info</i><span class="icon-text"></span>About</a></span>
-      </a><br>
-      <a href="#"><i class="material-icons">settings</i><span class="icon-text"></span>Settings</span></a><br>
+    <div id="mySidebar" class="sidebar">
+      <a id="sidebar-Menu" href="#" onclick="toggleSidebar()"><span><i id="icon-Menu" class="material-icons">menu</i><span class="icon-text">Menu</span></a><br>
+      <a id="sidebar-Home" href="#" onclick="appendContainer(this.id,'container-overview')"><span><i id="icon-Home" class="material-icons icon-selected">home</i><span class="icon-text">Home</span></a><br>
+      <a id="sidebar-About" href="#" onclick="appendContainer(this.id,'container-about')"><i id="icon-About" class="material-icons">info</i><span class="icon-text">About</span></a><br>
+      <a id="sidebar-Settings" href="#" onclick="appendContainer(this.id,'container-settings')"><i id="icon-Settings" class="material-icons">settings</i><span class="icon-text">Settings</span></a><br>
     </div>
 
+    <!-- Should keep this as it is targeted within css -->
     <div id="main">
-      <h2>Open/Collapse Sidebar on Hover</h2>
-      <p>Hover over any part of the sidebar to open the it.</p>
-      <p>To close the sidebar, move your mouse out of the sidebar.</p>
+      <div id="container-overview">
+      </div>
+      <div id="container-about">
+      </div>
+      <div id="container-settings">
+      </div>
+      <p>Test</p>
     </div>
       <script src="main.js"></script>
   </body>
