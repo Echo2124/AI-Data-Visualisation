@@ -48,8 +48,25 @@ body {
   display: block;
 }
 
+.main-container {
+  display: none;
+}
+
 .sidebar a:hover {
   color: #f1f1f1;
+}
+
+.node-containers {
+   border-radius: 10px;
+}
+
+.primary-container {
+  max-width: 80%;
+}
+
+.col {
+  flex-grow: 4;
+   justify-content: space-around;
 }
 
 main .sidebar {
@@ -64,6 +81,9 @@ main .sidebar {
   display: none;
 }
 
+.container {
+    justify-content: space-around;
+}
 
 .material-icons,
 .icon-text {

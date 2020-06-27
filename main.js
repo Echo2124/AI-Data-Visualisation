@@ -5,7 +5,12 @@
 
 function init() {
   console.log("Initialising...");
-
+  // test charts
+  generateChart("chart-node-1", "")
+  generateChart("chart-node-2", "")
+  generateChart("chart-node-3", "")
+  generateChart("chart-node-4", "")
+  generateChart("chart-node-5", "")
 }; init();
 
 
@@ -33,6 +38,10 @@ function toggleSidebar() {
 
 function appendContainer(id,container) {
   var curContainer = document.getElementById(container);
+  var containers = document.getElementsByClassName("main-container");
+  for (var i = 0; i < containers.length; i++) {
+    containers[i].style.display = "none";
+  }
   curContainer.style.display = "initial";
   console.debug("id: " + id)
   $(".material-icons").removeClass("icon-selected")
@@ -50,9 +59,10 @@ function appendContainer(id,container) {
 }
 
 function generateChart(nodeName, data) {
+  var targetNode = document.getElementById(nodeName)
   var currentNode = document.createElement("canvas");
   currentNode.classList.add("node-graph");
-  var ctx = document.getElementById(currentNode).getContext('2d');
+  var ctx = currentNode.getContext('2d');
   var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: 'line',
@@ -71,4 +81,6 @@ function generateChart(nodeName, data) {
     // Configuration options go here
     options: {}
 });
+
+targetNode.appendChild(currentNode)
 }
