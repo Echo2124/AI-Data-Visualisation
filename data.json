@@ -1,0 +1,13 @@
+{
+   "chartData": [
+
+      {
+         "type":"bar",
+         "backgroundColor": "rgb(255, 99, 132)",
+         "borderColor": "rgb(255, 99, 132)",
+         "labels": ["January", "February", "March", "April","May", "June", "July"],
+         "label": "Dataset",
+         "data": [0, 10, 5, 2, 20, 30, 45]
+      }
+   ]
+}

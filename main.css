@@ -20,7 +20,7 @@ body {
 .sidebar {
   height: 100%;
   width: 60px;
-  position: fixed;
+  position: absolute;
   z-index: 1;
   top: 0;
   left: 0;
@@ -56,12 +56,31 @@ body {
   color: #f1f1f1;
 }
 
+.node-title-text {
+  text-align: center;
+  padding-top: 1px;
+}
+
 .node-containers {
    border-radius: 10px;
 }
 
 .primary-container {
   max-width: 80%;
+}
+
+.credits {
+  position: fixed;
+  left: 50%;
+  bottom: -1%;
+  width: 25%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color:	rgba(24,24,24, 0.7);
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+   transform: translate(-50%, -50%);
 }
 
 .col {

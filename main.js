@@ -6,11 +6,14 @@
 function init() {
   console.log("Initialising...");
   // test charts
-  generateChart("chart-node-1", "")
+  /* generateChart("chart-node-1", "")
   generateChart("chart-node-2", "")
   generateChart("chart-node-3", "")
   generateChart("chart-node-4", "")
-  generateChart("chart-node-5", "")
+  generateChart("chart-node-5", "") */
+  // Appends overview menu by default when page is loaded
+  appendContainer("sidebar-Home", "container-overview");
+  fetchChartData();
 }; init();
 
 
@@ -36,6 +39,27 @@ function toggleSidebar() {
   }
 }
 
+function fetchChartData() {
+  $(document).ready(function(){
+
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        console.log("Length: " + data.chartData.length)
+        console.log(data.chartData[0].data)
+        //test
+        for (var i = 0; i < 6; i++) {
+          if (i == 0 ) {
+
+          } else {
+          generateChart("chart-node-" + i, data.chartData[0])
+        }
+        }
+      })
+
+  });
+}
+
 function appendContainer(id,container) {
   var curContainer = document.getElementById(container);
   var containers = document.getElementsByClassName("main-container");
@@ -58,29 +82,33 @@ function appendContainer(id,container) {
   }
 }
 
-function generateChart(nodeName, data) {
+
+
+
+function generateChart(nodeName, chart) {
   var targetNode = document.getElementById(nodeName)
   var currentNode = document.createElement("canvas");
   currentNode.classList.add("node-graph");
   var ctx = currentNode.getContext('2d');
-  var chart = new Chart(ctx, {
+  var config = {
     // The type of chart we want to create
-    type: 'line',
+    type: chart.type,
 
     // The data for our dataset
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: chart.labels,
         datasets: [{
-            label: 'My First dataset',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            label: chart.label,
+            backgroundColor: chart.backgroundColor,
+            borderColor: chart.borderColor,
+            data: chart.data
         }]
     },
 
     // Configuration options go here
     options: {}
-});
+  }
+  var chart = new Chart(ctx, config);
 
-targetNode.appendChild(currentNode)
+$(targetNode).prepend(currentNode)
 }
