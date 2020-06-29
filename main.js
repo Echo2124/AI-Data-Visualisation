@@ -79,6 +79,7 @@ function appendContainer(id,container) {
   var containers = document.getElementsByClassName("main-container");
   for (var i = 0; i < containers.length; i++) {
     containers[i].style.display = "none";
+    containers[i].addClass
   }
   curContainer.style.display = "initial";
   console.debug("id: " + id)
@@ -96,7 +97,7 @@ function appendContainer(id,container) {
   }
 }
 
-
+// TODO: Clean this function up and use a seperate function for fetch the JSON data
 function generateNodePanelInfo(NodeID) {
   var node_modal_Title = document.getElementsByClassName("modal-title")[0];
   var node_modal_Body = document.getElementsByClassName("modal-body")[0];
@@ -108,33 +109,38 @@ function generateNodePanelInfo(NodeID) {
         switch(NodeID) {
           case "chart-node-1":
             clearMdl()
+            setupMdl()
             node_modal_Title.innerText = data.chartData[0].category;
-            generateChart("mdl-body", data.chartData[0]);
-            appendText(NodeID, "mdl-body", data.chartData[0])
+            generateChart("graphCol", data.chartData[0]);
+            appendText(NodeID, "textCol", data.chartData[0])
           break;
           case "chart-node-2":
           clearMdl()
+          setupMdl()
             node_modal_Title.innerText = data.chartData[1].category;
-            generateChart("mdl-body", data.chartData[1]);
-            appendText(NodeID, "mdl-body", data.chartData[1])
+            generateChart("graphCol", data.chartData[1]);
+            appendText(NodeID, "textCol", data.chartData[1])
           break;
           case "chart-node-3":
           clearMdl()
+          setupMdl()
             node_modal_Title.innerText = data.chartData[2].category;
-            generateChart("mdl-body", data.chartData[2]);
-            appendText(NodeID, "mdl-body", data.chartData[2])
+            generateChart("graphCol", data.chartData[2]);
+            appendText(NodeID, "textCol", data.chartData[2])
           break;
           case "chart-node-4":
           clearMdl()
+          setupMdl()
             node_modal_Title.innerText = data.chartData[3].category;
-            generateChart("mdl-body", data.chartData[3]);
-            appendText(NodeID, "mdl-body", data.chartData[3])
+            generateChart("graphCol", data.chartData[3]);
+            appendText(NodeID, "textCol", data.chartData[3])
           break;
           case "chart-node-5":
           clearMdl()
+          setupMdl()
             node_modal_Title.innerText = data.chartData[4].category;
-            generateChart("mdl-body", data.chartData[4]);
-            appendText(NodeID, "mdl-body", data.chartData[4])
+            generateChart("graphCol", data.chartData[4]);
+            appendText(NodeID, "textCol", data.chartData[4])
         }
     })
     function appendText(id, nodeName, data) {
@@ -143,7 +149,7 @@ function generateNodePanelInfo(NodeID) {
       var target = document.getElementById(nodeName);
       var num = id.charAt(id.length - 1);
       console.log("num: " + num)
-      var target = document.getElementById("mdl-body")
+      var target = document.getElementById(nodeName)
       var text = document.createElement("p");
       text.innerText = data.text;
       target.appendChild(text)
@@ -152,7 +158,7 @@ function generateNodePanelInfo(NodeID) {
     function appendDivider() {
       var divider = document.createElement("div");
       divider.classList.add("vd");
-      node_modal_Body.appendChild(divider)
+      document.getElementById("divCol").appendChild(divider)
     }
 
     function clearMdl() {
@@ -161,6 +167,28 @@ function generateNodePanelInfo(NodeID) {
         while (node_modal_Body.lastElementChild) {
           node_modal_Body.removeChild(node_modal_Body.lastElementChild);
         }
+    }
+
+    function setupMdl() {
+      // generate grid
+      var container = document.createElement("div");
+      container.classList.add("container");
+      var row = document.createElement("div");
+      row.classList.add("row");
+      var firstCol = document.createElement("div");
+      firstCol.classList.add("col");
+      firstCol.id = "graphCol";
+      var secondCol = document.createElement("div");
+      secondCol.classList.add("col-md-auto");
+      secondCol.id = "divCol";
+      var thirdCol = document.createElement("div");
+      thirdCol.classList.add("col");
+      thirdCol.id = "textCol";
+      row.appendChild(firstCol);
+      row.appendChild(secondCol);
+      row.appendChild(thirdCol);
+      container.appendChild(row);
+      node_modal_Body.appendChild(container);
     }
   });
 }

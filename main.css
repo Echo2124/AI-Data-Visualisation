@@ -31,9 +31,28 @@ body {
   white-space: nowrap;
 }
 
+.modal-lg {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.modal-dialog {
+  height: 90%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+}
+.modal-content {
+  height: 100%; /* = 100% of the .modal-dialog block */
+}
+
+.fade {
+   opacity: 1;
+   transition: opacity .50s ease-in-out;
+   -moz-transition: opacity .50s ease-in-out;
+   -webkit-transition: opacity .50s ease-in-out;
+   }
+
 .vd {
   border-left: 0.5px solid black;
-  height: 500px;
+  height: 100%;
   position: absolute;
   left: 50%;
   margin-left: -3px;
