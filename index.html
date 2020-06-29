@@ -35,34 +35,50 @@
         <div class="container primary-container">
   <div class="row">
     <div class="col-md">
-      <div id="chart-node-1" class="node-containers container p-3 my-3 bg-dark text-white">
+      <div id="chart-node-1" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="generateNodePanelInfo(this.id)" class="node-containers container p-3 my-3 bg-dark text-white">
         <h5 class="node-title-text">Artificial Intelligence</h5>
       </div>
     </div>
     <div class="col-md">
-      <div id="chart-node-2" class="node-containers container p-3 my-3 bg-dark text-white">
+      <div id="chart-node-2" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="generateNodePanelInfo(this.id)" class="node-containers container p-3 my-3 bg-dark text-white">
 <h5 class="node-title-text">Finance</h5>
   </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <div id="chart-node-3" class="node-containers container p-3 my-3 bg-dark text-white">
+      <div id="chart-node-3" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="generateNodePanelInfo(this.id)" class="node-containers container p-3 my-3 bg-dark text-white">
 <h5 class="node-title-text">Recommendations</h5>
   </div>
     </div>
     <div class="col">
-      <div id="chart-node-4" class="node-containers container p-3 my-3 bg-dark text-white">
+      <div id="chart-node-4" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="generateNodePanelInfo(this.id)" class="node-containers container p-3 my-3 bg-dark text-white">
 <h5 class="node-title-text">Digital Assistants</h5>
       </div>
     </div>
     <div class="col">
-      <div id="chart-node-5" class="node-containers container p-3 my-3 bg-dark text-white">
+      <div id="chart-node-5" data-toggle="modal" data-target=".bd-example-modal-lg" onclick="generateNodePanelInfo(this.id)" class="node-containers container p-3 my-3 bg-dark text-white">
 <h5 class="node-title-text">Social Media</h5>
       </div>
     </div>
   </div>
 </div>
+
+<div id="node-panel" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div id="mdl-body" class="modal-body">
+          </div>
+        </div>
+  </div>
+</div>
+
 
       </div>
       <div id="container-about" class="main-container">

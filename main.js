@@ -13,7 +13,7 @@ function init() {
   generateChart("chart-node-5", "") */
   // Appends overview menu by default when page is loaded
   appendContainer("sidebar-Home", "container-overview");
-  fetchChartData();
+  fetchChartData(true);
 }; init();
 
 
@@ -39,14 +39,25 @@ function toggleSidebar() {
   }
 }
 
-function fetchChartData() {
+function fetchChartData(state) {
   $(document).ready(function(){
+/*    !async function(){
+    let data = await fetch("data.json")
+        .then((response) => response.json())
+        .catch(error => {
+            console.error(error);
+        });
 
+    console.log(data);
+  }();
+  */
     fetch('data.json')
       .then(response => response.json())
       .then(data => {
         console.log("Length: " + data.chartData.length)
         console.log(data.chartData[0].data)
+        // True = Generate charts; False = Just returns data
+        if (state == true) {
         //test
         for (var i = 0; i < 6; i++) {
           if (i == 0 ) {
@@ -55,9 +66,12 @@ function fetchChartData() {
           generateChart("chart-node-" + i, data.chartData[0])
         }
         }
+      }
+        return data;
       })
 
   });
+
 }
 
 function appendContainer(id,container) {
@@ -83,6 +97,73 @@ function appendContainer(id,container) {
 }
 
 
+function generateNodePanelInfo(NodeID) {
+  var node_modal_Title = document.getElementsByClassName("modal-title")[0];
+  var node_modal_Body = document.getElementsByClassName("modal-body")[0];
+
+  $(document).ready(function(){
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        switch(NodeID) {
+          case "chart-node-1":
+            clearMdl()
+            node_modal_Title.innerText = data.chartData[0].category;
+            generateChart("mdl-body", data.chartData[0]);
+            appendText(NodeID, "mdl-body", data.chartData[0])
+          break;
+          case "chart-node-2":
+          clearMdl()
+            node_modal_Title.innerText = data.chartData[1].category;
+            generateChart("mdl-body", data.chartData[1]);
+            appendText(NodeID, "mdl-body", data.chartData[1])
+          break;
+          case "chart-node-3":
+          clearMdl()
+            node_modal_Title.innerText = data.chartData[2].category;
+            generateChart("mdl-body", data.chartData[2]);
+            appendText(NodeID, "mdl-body", data.chartData[2])
+          break;
+          case "chart-node-4":
+          clearMdl()
+            node_modal_Title.innerText = data.chartData[3].category;
+            generateChart("mdl-body", data.chartData[3]);
+            appendText(NodeID, "mdl-body", data.chartData[3])
+          break;
+          case "chart-node-5":
+          clearMdl()
+            node_modal_Title.innerText = data.chartData[4].category;
+            generateChart("mdl-body", data.chartData[4]);
+            appendText(NodeID, "mdl-body", data.chartData[4])
+        }
+    })
+    function appendText(id, nodeName, data) {
+      // adds the divider to the modal
+      appendDivider()
+      var target = document.getElementById(nodeName);
+      var num = id.charAt(id.length - 1);
+      console.log("num: " + num)
+      var target = document.getElementById("mdl-body")
+      var text = document.createElement("p");
+      text.innerText = data.text;
+      target.appendChild(text)
+    }
+
+    function appendDivider() {
+      var divider = document.createElement("div");
+      divider.classList.add("vd");
+      node_modal_Body.appendChild(divider)
+    }
+
+    function clearMdl() {
+      // clears everything-
+      node_modal_Title.innerText = "";
+        while (node_modal_Body.lastElementChild) {
+          node_modal_Body.removeChild(node_modal_Body.lastElementChild);
+        }
+    }
+  });
+}
 
 
 function generateChart(nodeName, chart) {
