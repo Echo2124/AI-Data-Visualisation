@@ -173,17 +173,26 @@ function generateNodePanelInfo(NodeID) {
       // generate grid
       var container = document.createElement("div");
       container.classList.add("container");
+      container.classList.add("grid-container")
       var row = document.createElement("div");
       row.classList.add("row");
       var firstCol = document.createElement("div");
-      firstCol.classList.add("col");
+      firstCol.classList.add("col-12");
+      firstCol.classList.add("col-md-8");
       firstCol.id = "graphCol";
       var secondCol = document.createElement("div");
       secondCol.classList.add("col-md-auto");
       secondCol.id = "divCol";
       var thirdCol = document.createElement("div");
-      thirdCol.classList.add("col");
+      var infoTitle = document.createElement("h3");
+      var divider = document.createElement("hr");
+      divider.id = "mdl-h-divider"
+      infoTitle.innerText = "Information";
+      thirdCol.classList.add("col-3");
+      thirdCol.classList.add("col-md-3")
       thirdCol.id = "textCol";
+      thirdCol.appendChild(infoTitle);
+      thirdCol.appendChild(divider)
       row.appendChild(firstCol);
       row.appendChild(secondCol);
       row.appendChild(thirdCol);
