@@ -1,55 +1,186 @@
 {
-   "chartData": [
-
+   "chartData":[
       {
-        "category": "Usages of AI",
+         "category":"Usages of AI",
          "type":"bar",
-         "backgroundColor": "rgb(255, 99, 132)",
-         "borderColor": "rgb(255, 99, 132)",
-         "labels": ["January", "February", "March", "April","May", "June", "July"],
-         "label": "Dataset",
-         "text": "Whatever text for usages of ai",
-         "data": [0, 10, 5, 2, 20, 30, 45]
+         "contents":[
+            {
+               "labels":[
+                  "Yes",
+                  "No"
+               ],
+               "text":"Whatever text for usages of AI",
+               "datasets":[
+                  {
+                     "label":"Used online customer chat service",
+                     "backgroundColor":"pink",
+                     "borderColor":"red",
+                     "borderWidth":1,
+                     "data":[
+                        35,
+                        24
+                     ]
+                  },
+                  {
+                     "label":"Played a video game against an NPC",
+                     "backgroundColor":"green",
+                     "borderColor":"red",
+                     "borderWidth":1,
+                     "data":[
+                        51,
+                        8
+                     ]
+                  }
+               ]
+            }
+         ]
       },
       {
-        "category": "Finance",
+         "category":"Finance",
          "type":"bar",
-         "backgroundColor": "rgb(255, 99, 132)",
-         "borderColor": "rgb(255, 99, 132)",
-         "labels": ["January", "February", "March", "April","May", "June", "July"],
-         "label": "Dataset",
-         "text": "Whatever text for usages of Finance",
-         "data": [0, 10, 5, 2, 20, 30, 45]
+         "contents":[
+            {
+               "labels":[
+                  "Yes",
+                  "No"
+               ],
+               "text":"Whatever text for usages of Finance",
+               "datasets":[
+                  {
+                     "label":"Victim of Financial Fraud",
+                     "backgroundColor":"pink",
+                     "borderColor":"red",
+                     "borderWidth":1,
+                     "data":[
+                        8,
+                        51
+                     ]
+                  },
+                  {
+                     "label":"Shopped online using Amazon",
+                     "backgroundColor":"green",
+                     "borderColor":"red",
+                     "borderWidth":1,
+                     "data":[
+                        37,
+                        22
+                     ]
+                  },
+                  {
+                     "label":"Use online banking",
+                     "backgroundColor":"yellow",
+                     "borderColor":"red",
+                     "borderWidth":1,
+                     "data":[
+                        47,
+                        12
+                     ]
+                  }
+               ]
+            }
+         ]
       },
       {
-        "category": "Recommendations",
+         "category":"Recommendations",
          "type":"bar",
-         "backgroundColor": "rgb(255, 99, 132)",
-         "borderColor": "rgb(255, 99, 132)",
-         "labels": ["January", "February", "March", "April","May", "June", "July"],
-         "label": "Dataset",
-         "text": "Whatever text for usages of Recommendations",
-         "data": [0, 10, 5, 2, 20, 30, 45]
+         "contents":[
+            {
+               "labels":[
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July"
+               ],
+               "datasets":[
+                  {
+                     "backgroundColor":"rgb(255, 99, 132)",
+                     "borderColor":"rgb(255, 99, 132)",
+                     "label":"Dataset",
+                     "text":"Whatever text for usages of ai",
+                     "data":[
+                        0,
+                        10,
+                        5,
+                        2,
+                        20,
+                        30,
+                        45
+                     ]
+                  }
+               ]
+            }
+         ]
       },
       {
-        "category": "Digital Assistants",
+         "category":"Digital Assistants",
          "type":"bar",
-         "backgroundColor": "rgb(255, 99, 132)",
-         "borderColor": "rgb(255, 99, 132)",
-         "labels": ["January", "February", "March", "April","May", "June", "July"],
-         "label": "Dataset",
-         "text": "Whatever text for usages of Digital Asistants",
-         "data": [0, 10, 5, 2, 20, 30, 45]
+         "contents":[
+            {
+               "labels":[
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July"
+               ],
+               "datasets":[
+                  {
+                     "backgroundColor":"rgb(255, 99, 132)",
+                     "borderColor":"rgb(255, 99, 132)",
+                     "label":"Dataset",
+                     "text":"Whatever text for usages of ai",
+                     "data":[
+                        0,
+                        10,
+                        5,
+                        2,
+                        20,
+                        30,
+                        45
+                     ]
+                  }
+               ]
+            }
+         ]
       },
       {
-        "category": "Social Media",
+         "category":"Social Media",
          "type":"bar",
-         "backgroundColor": "rgb(255, 99, 132)",
-         "borderColor": "rgb(255, 99, 132)",
-         "labels": ["January", "February", "March", "April","May", "June", "July"],
-         "label": "Dataset",
-         "text": "Whatever text for usages of Social Media",
-         "data": [0, 10, 5, 2, 20, 30, 45]
+         "contents":[
+            {
+               "labels":[
+                  "January",
+                  "February",
+                  "March",
+                  "April",
+                  "May",
+                  "June",
+                  "July"
+               ],
+               "datasets":[
+                  {
+                     "backgroundColor":"rgb(255, 99, 132)",
+                     "borderColor":"rgb(255, 99, 132)",
+                     "label":"Dataset",
+                     "text":"Whatever text for usages of ai",
+                     "data":[
+                        0,
+                        10,
+                        5,
+                        2,
+                        20,
+                        30,
+                        45
+                     ]
+                  }
+               ]
+            }
+         ]
       }
    ]
 }

@@ -1,4 +1,4 @@
-/* AI Data Visualisation. Created by Josh S 2020. */
+ /* AI Data Visualisation. Created by Josh S 2020. */
 
 .navbar {
  min-height: 60px;
@@ -34,6 +34,10 @@
 
 }
 
+.settings-container {
+  border: 1px solid white;
+}
+
 .modal-dialog {
 /* = 90% of the .modal-backdrop block = %90 of the screen */
 }
@@ -57,6 +61,10 @@ media screen and (min-width: 768px) {
 
 .main-bg {
   background-color: rgba(10,10,10,0.5);
+}
+
+.node-panel-bg {
+  background-color: rgba(255,255,255,0.4);
 }
 
 #mdl-h-divider {
@@ -188,6 +196,69 @@ main .sidebar {
   }
 }
 
+#splashscreen {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(25, 25, 112); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+}
+
+.fadeout-anim {
+  animation: fadeout 0.5s;
+  -moz-animation: fadeout 0.5s; /* Firefox */
+  -webkit-animation: fadeout 0.5s; /* Safari and Chrome */
+  -o-animation: fadeout 0.5s; /* Opera */
+}
+
+@keyframes fadeout {
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+@-moz-keyframes fadeout { /* Firefox */
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+@-webkit-keyframes fadeout { /* Safari and Chrome */
+    from {
+        opacity:1;
+    }
+    to {
+        opacity:0;
+    }
+}
+@-o-keyframes fadeout { /* Opera */
+    from {
+        opacity:1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.splash-container {
+}
+
+.splashscreen-img {
+  width: 256px;
+  height: 256px
+  left: 50%;
+  vertical-align: middle
+}
+
 /* Background Gradient */
 body {
   font-family: "Lato", sans-serif;
@@ -201,4 +272,69 @@ body {
         0% {background-position: 0%}
         100% {background-position: 100%}
     }
+  }
+
+  @keyframes blink {
+      /**
+       * At the start of the animation the dot
+       * has an opacity of .2
+       */
+      0% {
+        opacity: .2;
+      }
+      /**
+       * At 20% the dot is fully visible and
+       * then fades out slowly
+       */
+      20% {
+        opacity: 1;
+      }
+      /**
+       * Until it reaches an opacity of .2 and
+       * the animation can start again
+       */
+      100% {
+        opacity: .2;
+      }
+  }
+
+  .saving span {
+      /**
+       * Use the blink animation, which is defined above
+       */
+      animation-name: blink;
+      /**
+       * The animation should take 1.4 seconds
+       */
+      animation-duration: 1.4s;
+      /**
+       * It will repeat itself forever
+       */
+      animation-iteration-count: infinite;
+      /**
+       * This makes sure that the starting style (opacity: .2)
+       * of the animation is applied before the animation starts.
+       * Otherwise we would see a short flash or would have
+       * to set the default styling of the dots to the same
+       * as the animation. Same applies for the ending styles.
+       */
+      animation-fill-mode: both;
+  }
+
+  .saving span:nth-child(2) {
+      /**
+       * Starts the animation of the third dot
+       * with a delay of .2s, otherwise all dots
+       * would animate at the same time
+       */
+      animation-delay: .2s;
+  }
+
+  .saving span:nth-child(3) {
+      /**
+       * Starts the animation of the third dot
+       * with a delay of .4s, otherwise all dots
+       * would animate at the same time
+       */
+      animation-delay: .4s;
   }

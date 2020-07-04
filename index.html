@@ -15,7 +15,17 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
   <body>
-
+    <div id="splashscreen">
+      <div class="d-flex align-items-center min-vh-100">
+      <div class="container splash-container text-center">
+      <img class="splashscreen-img" src="AI.svg" style="padding-bottom: 15%" alt="Image Unavaliable">
+      <h4 class="initialising-anim" style="color: white; padding: 1.5%" id="splash-text"></h4>
+      <div class="progress">
+        <div id="splash-progress" class="progress-bar progress-bar-striped bg-info progress-bar-animated active" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </div>
+    </div>
+    </div>
     <nav id="navbar" class="navbar text-center navbar-expand-lg navbar-dark main-bg">
       <div class="container text-center">
         <h6 id="question-text" class="text-light">In what ways does Artificial Intelligence improve the quality of life for the average person?</h6>
@@ -66,7 +76,7 @@
 
 <div id="node-panel" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content main-bg">
+    <div class="modal-content text-white node-panel-bg">
           <div class="modal-header">
             <h5 class="modal-title"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -82,10 +92,56 @@
 
       </div>
       <div id="container-about" class="main-container">
-        <p>This is the About container</p>
+        <div id="about" class="container p-3 my-3 main-bg text-white">
+          <h4 style="padding-left: 1%;">About</h4>
+          <hr style="border-top: 1px solid white">
+          <h5 style="text-decoration: underline">Purpose:</h5>
+          <p> information about the website</p>
+          <h5 style="text-decoration: underline">Technologies used:</h5>
+
+          <p class="card-text"><b>Frameworks/Libraries used:</b></p>
+          <ul>
+            <li><b>jQuery</b> | <a href="https://jquery.com/">https://jquery.com/</a></li>
+            <li><b>Bootstrap</b> | <a
+                href="https://getbootstrap.com/">https://getbootstrap.com/</a></li>
+            <li><b>Popper.js</b> | <a href="https://popper.js.org/">https://popper.js.org/</a>
+            </li>
+            <li><b>Chart.js</b> | <a href="https://www.chartjs.org/">https://www.chartjs.org/</a></li>
+          </ul>
+          <p class="card-text">If you have a bug or issue to report please feel free to send it my
+            way: <a
+              href="mailto:seegej15@mazenodcollege.vic.edu.au">seegej15@mazenodcollege.vic.edu.au</a>
+          </p>
+        </div>
       </div>
       <div id="container-settings" class="main-container">
-        <p>This is the settings container</p>
+        <div id="settings-con" class="container p-3 my-3 main-bg text-white">
+          <h4 style="padding-left: 1%;">Settings</h4>
+          <hr style="border-top: 1px solid white">
+          <div id="theme-settings" class="container settings-container p-3 my-3 main-bg text-white">
+              <h5>Themes:</h5>
+              <label for="themes">Style:</label>
+                <select name="themes" id="themes" class="form-control">
+                  <option value="0" default>Default (Dark)</option>
+                  <option value="1">Light</option>
+                </select>
+                <label for="gradient">Gradient:</label>
+                  <select name="gradient" id="gradient" class="form-control">
+                    <option value="0" default>Default</option>
+                    <option value="1"></option>
+                  </select>
+          </div>
+          <div id="adv-settings" class="container settings-container p-3 my-3 main-bg text-white">
+              <h5>Advanced Settings:</h5>
+                <button id="reset" class="btn btn-sm btn-warning mb-2">Reset Website</button>
+          </div>
+          <div class="row justify-content-center" style="padding: 1px">
+            <div style="padding-right: 1%">
+          <button id="discard" class="btn btn-secondary mb-2">Discard</button>
+        </div>
+          <button id="apply" class="btn btn-primary mb-2">Apply</button>
+        </div>
+        </div>
       </div>
 
       <div class="credits main-bg">

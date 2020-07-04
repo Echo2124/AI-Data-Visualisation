@@ -5,6 +5,14 @@
 
 function init() {
   console.log("Initialising...");
+
+  var cookies = document.cookie;
+  console.log("Cookies: " +cookies)
+  if (cookies == "") {
+      splashscreen("First time setup! Initialising")
+  } else {
+    //  splashscreen("Loading")
+  }
   // test charts
   /* generateChart("chart-node-1", "")
   generateChart("chart-node-2", "")
@@ -15,6 +23,41 @@ function init() {
   appendContainer("sidebar-Home", "container-overview");
   fetchChartData(true);
 }; init();
+
+function splashscreen(msg) {
+  document.getElementById("splashscreen").style.display = "block";
+  var progressbar = document.getElementById("splash-progress");
+  var splash_text = document.getElementById("splash-text");
+  var curText = splash_text.innerText
+  splash_text.innerText = msg;
+  var progress = 0;
+  // fix up ... animation later
+  /*
+  var loadanim = setInterval(function() {
+    if (splash_text.innerHTML += '.').length == 4)
+        splash_text.innerHTML = '';
+}, 500);
+*/
+  setInterval(function () {
+    var salt = Math.floor(Math.random() * 10);
+    progress += 3 + salt;
+    $(progressbar)
+    .css("width", progress + "%")
+    .attr("aria-valuenow", progress)
+    progressbar.setAttribute("aria-valuenow", progress);
+    if (progress >= 100) {
+      clearInterval(this);
+    //  clearInterval(loadanim);
+    }
+  }, 150)
+  setTimeout(function() {
+    document.getElementById("splashscreen").classList.add("fadeout-anim")
+    setTimeout(function() {
+      document.getElementById("splashscreen").style.display = "none";
+    }, 500)
+  }, 3000)
+
+}
 
 
 function toggleSidebar() {
@@ -54,17 +97,15 @@ function fetchChartData(state) {
     fetch('data.json')
       .then(response => response.json())
       .then(data => {
-        console.log("Length: " + data.chartData.length)
-        console.log(data.chartData[0].data)
+        console.log("Called!")
+        console.log(data.chartData[0].contents[0].datasets[0].backgroundColor)
         // True = Generate charts; False = Just returns data
         if (state == true) {
-        //test
-        for (var i = 0; i < 6; i++) {
-          if (i == 0 ) {
+        var t = 1;
+        for (var i = 0; i < data.chartData.length; i++) {
+            generateChart("chart-node-" + t, data.chartData[i])
+            t++
 
-          } else {
-          generateChart("chart-node-" + i, data.chartData[0])
-        }
         }
       }
         return data;
@@ -106,6 +147,7 @@ function generateNodePanelInfo(NodeID) {
     fetch('data.json')
       .then(response => response.json())
       .then(data => {
+        console.log("Bang!")
         switch(NodeID) {
           case "chart-node-1":
             clearMdl()
@@ -151,7 +193,7 @@ function generateNodePanelInfo(NodeID) {
       console.log("num: " + num)
       var target = document.getElementById(nodeName)
       var text = document.createElement("p");
-      text.innerText = data.text;
+      text.innerText = data.contents[0].text;
       target.appendChild(text)
     }
 
@@ -208,25 +250,33 @@ function generateChart(nodeName, chart) {
   var currentNode = document.createElement("canvas");
   currentNode.classList.add("node-graph");
   var ctx = currentNode.getContext('2d');
-  var config = {
+  console.log(chart.contents[0].datasets[0].backgroundColor)
+  var data = chart.contents[0].datasets.map(function (j) {
+    return j
+  })
+  var standard_config = {
     // The type of chart we want to create
     type: chart.type,
 
-    // The data for our dataset
+    // The data for dataset
+
     data: {
-        labels: chart.labels,
-        datasets: [{
-            label: chart.label,
-            backgroundColor: chart.backgroundColor,
-            borderColor: chart.borderColor,
-            data: chart.data
-        }]
+      labels: chart.contents[0].labels,
+      datasets: data,
+
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+      "scales": {
+        "yAxes": [{
+          "ticks": {
+            "beginAtZero": true
+          }
+        }]
+      }
+    }
   }
-  var chart = new Chart(ctx, config);
-
+  var chart = new Chart(ctx, standard_config);
 $(targetNode).prepend(currentNode)
 }
