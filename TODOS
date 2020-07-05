@@ -1,0 +1,5 @@
+TODOS:
+
+* Need to fix up the retrieval of options from the JSON file.
+** may want to consider replacing the current title that isn't associated with the graph with one that is. It would mean that it would have better formatting and I could add the research question or category there.
+*** Will also need to do some work on programming the settings for the solution.

@@ -31,6 +31,17 @@
                         8
                      ]
                   }
+               ],
+               "options":[
+                  {
+                    "title":[
+                      {
+                      "display": true,
+                      "text":"Testing text",
+                      "position":"top"
+                    }
+                  ]
+                  }
                ]
             }
          ]
@@ -76,39 +87,57 @@
                         12
                      ]
                   }
+               ],
+               "options":[
+                  {
+                    "title":[
+                      {
+                      "display": true,
+                      "text":"Testing text",
+                      "position":"top"
+                    }
+                  ]
+                  }
                ]
             }
          ]
       },
       {
          "category":"Recommendations",
-         "type":"bar",
+         "type":"pie",
          "contents":[
             {
                "labels":[
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July"
+                 "Yes",
+                 "No"
                ],
                "datasets":[
                   {
-                     "backgroundColor":"rgb(255, 99, 132)",
-                     "borderColor":"rgb(255, 99, 132)",
+                    "fill": true,
+                     "backgroundColor":[
+                       "red",
+                       "blue"
+                     ],
+                     "borderColor":[
+                       "red",
+                       "blue"
+                     ],
                      "label":"Dataset",
-                     "text":"Whatever text for usages of ai",
                      "data":[
-                        0,
-                        10,
-                        5,
-                        2,
-                        20,
-                        30,
-                        45
+                       55,
+                       4
                      ]
+                  }
+               ],
+               "options":[
+                  {
+                    "title":[
+                      {
+                      "display": true,
+                      "text":"Testing text",
+                      "position":"top"
+                    }
+                  ]
                   }
                ]
             }
@@ -116,33 +145,45 @@
       },
       {
          "category":"Digital Assistants",
-         "type":"bar",
+         "type":"doughnut",
          "contents":[
             {
                "labels":[
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July"
+                "Google Home",
+                "Amazon Echo",
+                "Apple Homepod"
                ],
+               "text":"Whatever text for usages of ai",
                "datasets":[
                   {
-                     "backgroundColor":"rgb(255, 99, 132)",
-                     "borderColor":"rgb(255, 99, 132)",
+                    "fill": true,
+                     "backgroundColor":[
+                       "green",
+                       "blue",
+                       "yellow"
+                     ],
+                     "borderColor":[
+                       "green",
+                       "blue",
+                       "yellow"
+                     ],
                      "label":"Dataset",
-                     "text":"Whatever text for usages of ai",
                      "data":[
-                        0,
-                        10,
-                        5,
-                        2,
                         20,
-                        30,
-                        45
+                        8,
+                        4
                      ]
+                  }
+               ],
+               "options":[
+                  {
+                    "title":[
+                      {
+                      "display": true,
+                      "text":"Testing text",
+                      "position":"top"
+                    }
+                  ]
                   }
                ]
             }
@@ -150,33 +191,49 @@
       },
       {
          "category":"Social Media",
-         "type":"bar",
+         "type":"pie",
          "contents":[
             {
                "labels":[
-                  "January",
-                  "February",
-                  "March",
-                  "April",
-                  "May",
-                  "June",
-                  "July"
+                 "Snapchat",
+                 "Pinterest",
+                 "Facebook",
+                 "Instagram"
                ],
+               "text":"Whatever text for usages of Social Media",
                "datasets":[
                   {
-                     "backgroundColor":"rgb(255, 99, 132)",
-                     "borderColor":"rgb(255, 99, 132)",
+                    "fill": true,
+                     "backgroundColor":[
+                       "green",
+                       "blue",
+                       "yellow",
+                       "red"
+                     ],
+                     "borderColor":[
+                       "green",
+                       "blue",
+                       "yellow",
+                       "red"
+                     ],
                      "label":"Dataset",
-                     "text":"Whatever text for usages of ai",
                      "data":[
-                        0,
-                        10,
-                        5,
-                        2,
-                        20,
-                        30,
-                        45
+                       50,
+                       6,
+                       37,
+                       47
                      ]
+                  }
+               ],
+               "options":[
+                  {
+                    "title":[
+                      {
+                      "display": true,
+                      "text":"Testing text",
+                      "position":"top"
+                    }
+                  ]
                   }
                ]
             }

@@ -250,14 +250,16 @@ function generateChart(nodeName, chart) {
   var currentNode = document.createElement("canvas");
   currentNode.classList.add("node-graph");
   var ctx = currentNode.getContext('2d');
-  console.log(chart.contents[0].datasets[0].backgroundColor)
   var data = chart.contents[0].datasets.map(function (j) {
     return j
   })
+  var chartOptions = chart.contents[0].options.map(function (a) {
+    return a
+  })
+  console.log(chartOptions)
   var standard_config = {
     // The type of chart we want to create
     type: chart.type,
-
     // The data for dataset
 
     data: {
@@ -267,15 +269,7 @@ function generateChart(nodeName, chart) {
     },
 
     // Configuration options go here
-    options: {
-      "scales": {
-        "yAxes": [{
-          "ticks": {
-            "beginAtZero": true
-          }
-        }]
-      }
-    }
+    options: chartOptions[0],
   }
   var chart = new Chart(ctx, standard_config);
 $(targetNode).prepend(currentNode)
