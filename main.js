@@ -3,8 +3,9 @@
 // Global Vars
   var mini = true;
 var default_config = {
-  style: "dark",
-  gradient: "default",
+  style: "dark", // options = dark, light
+  gradient: "default", // options = default...
+  loading_screen_anim: "particle", // options = polygonal, particle
   night_mode: true
 }
 function init() {
@@ -13,7 +14,7 @@ function init() {
   var cookies = document.cookie;
   console.log("Cookies: " +cookies)
   if (cookies == "") {
-      splashscreen("First time setup! Initialising")
+      splashscreen("First time setup! Initialising",default_config.loading_screen_anim)
       append_settings(default_config);
   } else {
     //  splashscreen("Loading")
@@ -26,10 +27,11 @@ function init() {
 function append_settings(config) {
   document.getElementById("themes").value = config.style;
   document.getElementById("gradient").value = config.gradient;
+  document.getElementById("load_screen").value = config.loading_screen_anim;
   document.getElementById("night_mode").checked = config.night_mode;
 }
 
-function splashscreen(msg) {
+function splashscreen(msg, effect) {
   document.getElementById("splashscreen").style.display = "block";
   var progressbar = document.getElementById("splash-progress");
   var splash_text = document.getElementById("splash-text");
@@ -43,6 +45,40 @@ function splashscreen(msg) {
         splash_text.innerHTML = '';
 }, 500);
 */
+
+// MIGHT WANT TO DESTROY THESE OBJECTS AFTER SPLASHSCREEN HAS STOPPED AS THEY USE RESOURCES WHICH COULD BE FREED.
+switch (effect) {
+  case "particle":
+  $(document).ready(function(){
+  $('.splash_anim_bg').animatedbg({
+    colors : ["#7dcbd4", "#fdc014", "#acd573", "#fff"],
+    numParticles: 50
+  });
+});
+  break;
+ case "polygonal":
+ var target = document.getElementById("splashscreen")
+ var canvas = document.createElement("canvas");
+ canvas.id = "splash_canvas"
+ canvas.style.position = "fixed"
+ canvas.style.zIndex = "3"
+ canvas.style.minHeight = "100%";
+ canvas.style.minWidth = "100%";
+$(target).prepend(canvas);
+ console.log("Loading Screen Style = Polygonal")
+	$('#splash_canvas').particles();
+  $('#splash_canvas').particles({
+    connectParticles: true,
+    color: '#ffffff',
+    size: 3,
+    maxParticles: 80,
+    speed: 1.8
+});
+break;
+}
+
+
+
   setInterval(function () {
     var salt = Math.floor(Math.random() * 10);
     progress += 3 + salt;
@@ -61,7 +97,6 @@ function splashscreen(msg) {
       document.getElementById("splashscreen").style.display = "none";
     }, 500)
   }, 3000)
-
 }
 
 

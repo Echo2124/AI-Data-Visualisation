@@ -21,7 +21,7 @@
   </head>
   <body>
     <div id="splashscreen">
-      <div class="d-flex align-items-center min-vh-100">
+      <div id="splash-grid" class="d-flex align-items-center min-vh-100">
       <div class="container splash-container text-center">
       <img class="splashscreen-img" src="AI.svg" style="padding-bottom: 15%" alt="Image Unavaliable">
       <h4 class="initialising-anim" style="color: white; padding: 1.5%" id="splash-text"></h4>
@@ -30,6 +30,7 @@
       </div>
       </div>
     </div>
+    <div class="splash_anim_bg"></div>
     </div>
     <nav id="navbar" class="navbar text-center navbar-expand-lg navbar-dark main-bg">
       <div class="container text-center">
@@ -127,7 +128,7 @@
               <h5>Themes:</h5>
               <label for="themes">Style:</label>
                 <select name="themes" id="themes" class="form-control">
-                  <option value="dark" default>Default (Dark)</option>
+                  <option value="dark" default>Dark</option>
                   <option value="light">Light</option>
                 </select>
                 <label for="gradient">Gradient:</label>
@@ -135,6 +136,11 @@
                     <option value="default" default>Default</option>
                     <option value="1"></option>
                   </select>
+                  <label for="load_screen">Loading Screen Animation:</label>
+                    <select name="load_screen" id="load_screen" class="form-control">
+                      <option value="particle" default>Particle</option>
+                      <option value="polygonal">Polygonal Particles</option>
+                    </select>
                   <div class="checkbox">
   <label><input type="checkbox" id="night_mode" value="">Night Mode</label>
 </div>
@@ -156,8 +162,8 @@
           <small>Copyright © 2020 | Built by Josh S</small>
       </div>
     </div>
-
-
+    <script src="plugins/jquery.animated-bg.js"></script>
+    <script src="plugins/particles.js"></script>
       <script src="main.js"></script>
   </body>
 </html>
