@@ -209,6 +209,10 @@ main .sidebar {
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
 }
 
+.settings-elements {
+  padding: 1%;
+}
+
 .fadeout-anim {
   animation: fadeout 0.5s;
   -moz-animation: fadeout 0.5s; /* Firefox */

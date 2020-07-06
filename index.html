@@ -1,8 +1,13 @@
 <!-- AI Data Visualisation. Created by Josh S 2020. -->
-
+<!DOCTYPE html>
 <html>
   <head>
       <title>AI Visualisation</title>
+      <meta charset="UTF-8">
+<meta name="description" content="Artificial Intelligence (AI) Dynamic Data Visualisation for my SAT">
+<meta name="keywords" content="AI, Artificial Intelligence, SAT, Project">
+<meta name="author" content="Josh S">
+<link rel="icon" type="image/svg+xml" href="/ai_icon.svg">
       <!-- CSS only -->
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -122,14 +127,17 @@
               <h5>Themes:</h5>
               <label for="themes">Style:</label>
                 <select name="themes" id="themes" class="form-control">
-                  <option value="0" default>Default (Dark)</option>
-                  <option value="1">Light</option>
+                  <option value="dark" default>Default (Dark)</option>
+                  <option value="light">Light</option>
                 </select>
                 <label for="gradient">Gradient:</label>
                   <select name="gradient" id="gradient" class="form-control">
-                    <option value="0" default>Default</option>
+                    <option value="default" default>Default</option>
                     <option value="1"></option>
                   </select>
+                  <div class="checkbox">
+  <label><input type="checkbox" id="night_mode" value="">Night Mode</label>
+</div>
           </div>
           <div id="adv-settings" class="container settings-container p-3 my-3 main-bg text-white">
               <h5>Advanced Settings:</h5>

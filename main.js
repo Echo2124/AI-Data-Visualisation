@@ -2,7 +2,11 @@
 
 // Global Vars
   var mini = true;
-
+var default_config = {
+  style: "dark",
+  gradient: "default",
+  night_mode: true
+}
 function init() {
   console.log("Initialising...");
 
@@ -10,19 +14,20 @@ function init() {
   console.log("Cookies: " +cookies)
   if (cookies == "") {
       splashscreen("First time setup! Initialising")
+      append_settings(default_config);
   } else {
     //  splashscreen("Loading")
   }
-  // test charts
-  /* generateChart("chart-node-1", "")
-  generateChart("chart-node-2", "")
-  generateChart("chart-node-3", "")
-  generateChart("chart-node-4", "")
-  generateChart("chart-node-5", "") */
   // Appends overview menu by default when page is loaded
   appendContainer("sidebar-Home", "container-overview");
   fetchChartData(true);
 }; init();
+
+function append_settings(config) {
+  document.getElementById("themes").value = config.style;
+  document.getElementById("gradient").value = config.gradient;
+  document.getElementById("night_mode").checked = config.night_mode;
+}
 
 function splashscreen(msg) {
   document.getElementById("splashscreen").style.display = "block";
