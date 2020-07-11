@@ -1,6 +1,17 @@
 // AI Data Visualisation. Created by Josh S 2020.
+
+/*
+Purpose: This handles most of the functionality behind the website
+Current state: this code is mostly functional however it is not neat.
+Meaning that a rewrite of specific areas could be needed in order to make it run more smoothly.
+
+More important notes:
+Create a backup of current dependecies in local repository if remote ones are unable to be accessed
+might to create a single function to retreive json information instead of using two in order to streamline code.
+*/
+
 // Global Vars
-var mini = true;
+var sidebar_mini = true;
 var default_config = {
 	style: "dark", // options = dark, light
 	gradient: "default", // options = default...
@@ -13,7 +24,7 @@ function init() {
 	var cookies = document.cookie;
 	var cookies_state;
 	console.log("Cookies: " + cookies)
-	if (cookies == "") {
+	if (cookies == "null" || cookies == "" || cookies == null) {
 		splashscreen("First time setup! Initialising", default_config.loading_screen_anim)
 		append_settings(default_config);
 		cookies_state = false;
@@ -29,8 +40,9 @@ function init() {
 			// overrides existings settings with default as there are no custom settings
 			append_settings(default_config)
 		} else {
-			append_settings(fetchCustomSettings)
+			append_settings(fetchCustomSettings("settings"))
 		}
+		appendContainer("sidebar-Home", "container-overview");
 	}, false)
 
 	document.getElementById("apply").addEventListener("click", writeCustomSettings, false);
@@ -125,11 +137,16 @@ function apply_settings(config) {
 			}
 		}
 	};
-
-
-
 };
 
+function resetWebsite() {
+  console.log("Resetting website...");
+  document.cookie = "settings=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  location.reload();
+};
+
+
+// point of the splashscreen is to allow time for the interface to properly load-in
 function splashscreen(msg, effect) {
   var temp_object = {};
 	document.getElementById("splashscreen").style.display = "block";
@@ -205,20 +222,21 @@ function splashscreen(msg, effect) {
 
 
 function toggleSidebar() {
-	if (mini) {
+	if (sidebar_mini) {
 		document.getElementById("mySidebar").style.width = "200px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		for (var i = 0; i < icon_texts.length; i++) {
 			icon_texts[i].style.display = "initial";
 		}
 		document.getElementById("main").style.marginLeft = "200px";
-		this.mini = false;
+		this.sidebar_mini = false;
 	} else {
+		// Note might wanna create a class for this and just add the class to the elements instead to clean up the code
 		document.getElementById("mySidebar").style.width = "60px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		document.getElementById("main").style.marginLeft = "60px";
 		document.getElementById("navbar").style.marginLeft = "60px";
-		this.mini = true;
+		this.sidebar_mini = true;
 		for (var i = 0; i < icon_texts.length; i++) {
 			icon_texts[i].style.display = "none";
 		}
