@@ -21,6 +21,12 @@ var default_config = {
 
 function init() {
 	console.log("Initialising...");
+	var type;
+	 if (window.location.protocol == "file:") {
+		 type = "local";
+	 } else {
+		 type = "server";
+	 };
 	var cookies = document.cookie;
 	var cookies_state;
 	console.log("Cookies: " + cookies)
@@ -34,7 +40,7 @@ function init() {
 	}
 	// Appends overview menu by default when page is loaded
 	appendContainer("sidebar-Home", "container-overview");
-	fetchChartData(true);
+	fetchChartData(true, type);
 	document.getElementById("discard").addEventListener("click", function () {
 		if (cookies_state == false) {
 			// overrides existings settings with default as there are no custom settings
@@ -243,19 +249,12 @@ function toggleSidebar() {
 	}
 }
 
-function fetchChartData(state) {
+function fetchChartData(state, type) {
 	$(document).ready(function () {
-		/*    !async function(){
-		    let data = await fetch("data.json")
-		        .then((response) => response.json())
-		        .catch(error => {
-		            console.error(error);
-		        });
-
-		    console.log(data);
-		  }();
-		  */
-		fetch('data.json')
+		// if not local
+			  if (type !== "local") {
+				 // typical fetch
+			fetch('data.json')
 			.then(response => response.json())
 			.then(data => {
 				console.log("Called!")
@@ -271,7 +270,41 @@ function fetchChartData(state) {
 				}
 				return data;
 			})
+			  } else {
+			  $('#local-client').modal('toggle');
+			  var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
+				  var input = document.createElement('input');
+input.type = 'file';
+input.setAttribute("accept", ".json");
+input.onchange = e => { 
 
+   // getting a hold of the file reference
+   var file = e.target.files[0]; 
+
+   // setting up the reader
+   var reader = new FileReader();
+   reader.readAsText(file,'UTF-8');
+
+   // here we tell the reader what to do when it's done reading...
+   reader.onload = readerEvent => {
+      var content = JSON.parse(readerEvent.target.result) // this is the content!
+	  				if (state == true) {
+					var t = 1;
+					for (var i = 0; i < content.chartData.length; i++) {
+						generateChart("chart-node-" + t, content.chartData[i])
+						t++
+
+					}
+				}
+      return content
+   }
+
+}
+
+input.click();
+			  }, false);
+
+			  };
 	});
 
 }
