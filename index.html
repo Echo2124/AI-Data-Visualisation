@@ -7,7 +7,7 @@
 	<meta name="description" content="Artificial Intelligence (AI) Dynamic Data Visualisation for my SAT">
 	<meta name="keywords" content="AI, Artificial Intelligence, SAT, Project">
 	<meta name="author" content="Josh S">
-	<link rel="icon" type="image/svg+xml" href="/ai_icon.svg">
+	<link rel="icon" type="image/svg+xml" href="ai_icon.svg">
 	<!-- CSS only -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -185,7 +185,25 @@
 		</div>
 		<div id="bottom-credits" class="credits main-bg">	<small>Copyright © 2020 | Built by Josh S</small>
 		</div>
+		
 	</div>
+	<div class="modal" id="local-client" tabindex="1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Local Client Detected</h5>
+      </div>
+      <div class="modal-body">
+        <p>Detected that website is running from file URI scheme. Will open a prompt to select JSON File when you accept this disclaimer.</p>
+		<br>
+		<sup>(Hint): select data.json within the root directory of the website's folder</sup>
+      </div>
+      <div class="modal-footer">
+        <button id="local-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
 	<script src="plugins/jquery.animated-bg.js"></script>
 	<script src="plugins/particles.js"></script>
 	<script src="main.js"></script>
