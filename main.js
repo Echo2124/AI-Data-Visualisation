@@ -276,10 +276,10 @@ function fetchChartData(state, type) {
 				  var input = document.createElement('input');
 input.type = 'file';
 input.setAttribute("accept", ".json");
-input.onchange = e => { 
+input.onchange = e => {
 
    // getting a hold of the file reference
-   var file = e.target.files[0]; 
+   var file = e.target.files[0];
 
    // setting up the reader
    var reader = new FileReader();
@@ -344,35 +344,30 @@ function generateNodePanelInfo(NodeID) {
 				console.log("Bang!")
 				switch (NodeID) {
 				case "chart-node-1":
-					clearMdl()
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[0].category;
 					generateChart("graphCol", data.chartData[0]);
 					appendText(NodeID, "textCol", data.chartData[0])
 					break;
 				case "chart-node-2":
-					clearMdl()
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[1].category;
 					generateChart("graphCol", data.chartData[1]);
 					appendText(NodeID, "textCol", data.chartData[1])
 					break;
 				case "chart-node-3":
-					clearMdl()
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[2].category;
 					generateChart("graphCol", data.chartData[2]);
 					appendText(NodeID, "textCol", data.chartData[2])
 					break;
 				case "chart-node-4":
-					clearMdl()
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[3].category;
 					generateChart("graphCol", data.chartData[3]);
 					appendText(NodeID, "textCol", data.chartData[3])
 					break;
 				case "chart-node-5":
-					clearMdl()
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[4].category;
 					generateChart("graphCol", data.chartData[4]);
@@ -407,6 +402,7 @@ function generateNodePanelInfo(NodeID) {
 		}
 
 		function setupMdl() {
+			clearMdl();
 			// generate grid
 			var container = document.createElement("div");
 			container.classList.add("container");
