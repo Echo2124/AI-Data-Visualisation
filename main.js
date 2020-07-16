@@ -18,15 +18,11 @@ var default_config = {
 	loading_screen_anim: "particle", // options = polygonal, particle
 	night_mode: true
 }
+// used as a cache for later uses of the data such as the node panels
+var local_data;
 
 function init() {
 	console.log("Initialising...");
-	var type;
-	 if (window.location.protocol == "file:") {
-		 type = "local";
-	 } else {
-		 type = "server";
-	 };
 	var cookies = document.cookie;
 	var cookies_state;
 	console.log("Cookies: " + cookies)
@@ -40,7 +36,7 @@ function init() {
 	}
 	// Appends overview menu by default when page is loaded
 	appendContainer("sidebar-Home", "container-overview");
-	fetchChartData(true, type);
+	fetchChartData(true);
 	document.getElementById("discard").addEventListener("click", function () {
 		if (cookies_state == false) {
 			// overrides existings settings with default as there are no custom settings
@@ -249,10 +245,16 @@ function toggleSidebar() {
 	}
 }
 
-function fetchChartData(state, type) {
+function fetchChartData(state) {
+	var protocol_type;
+	 if (window.location.protocol == "file:") {
+		 protocol_type = "local";
+	 } else {
+		 protocol_type = "server";
+	 };
 	$(document).ready(function () {
 		// if not local
-			  if (type !== "local") {
+			  if (protocol_type !== "local") {
 				 // typical fetch
 			fetch('data.json')
 			.then(response => response.json())
@@ -288,6 +290,7 @@ input.onchange = e => {
    // here we tell the reader what to do when it's done reading...
    reader.onload = readerEvent => {
       var content = JSON.parse(readerEvent.target.result) // this is the content!
+	  local_data = content;
 	  				if (state == true) {
 					var t = 1;
 					for (var i = 0; i < content.chartData.length; i++) {
@@ -332,16 +335,21 @@ function appendContainer(id, container) {
 	}
 }
 
+
 // TODO: Clean this function up and use a seperate function for fetch the JSON data
 function generateNodePanelInfo(NodeID) {
+	// check if there is any cached local data
+	var data;
+if (local_data == "" || local_data == null || local_data == undefined) {
+		data = fetchChartData(false);
+	} else {
+		data = local_data;
+	};
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
 	var node_modal_Body = document.getElementsByClassName("modal-body")[0];
-
-	$(document).ready(function () {
-		fetch('data.json')
-			.then(response => response.json())
-			.then(data => {
-				console.log("Bang!")
+	console.log("Displaying data:");
+	console.log(data);
+// call fetch data function
 				switch (NodeID) {
 				case "chart-node-1":
 					setupMdl()
@@ -373,7 +381,6 @@ function generateNodePanelInfo(NodeID) {
 					generateChart("graphCol", data.chartData[4]);
 					appendText(NodeID, "textCol", data.chartData[4])
 				}
-			})
 
 		function appendText(id, nodeName, data) {
 			// adds the divider to the modal
@@ -432,7 +439,6 @@ function generateNodePanelInfo(NodeID) {
 			container.appendChild(row);
 			node_modal_Body.appendChild(container);
 		}
-	});
 }
 
 
