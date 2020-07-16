@@ -247,29 +247,35 @@ function toggleSidebar() {
 
 function fetchChartData(state) {
 	var protocol_type;
-	var data;
+	var jsonData;
 	 if (window.location.protocol == "file:") {
 		 protocol_type = "local";
 	 } else {
 		 protocol_type = "server";
 	 };
+	$(document).ready(function () {
 		// if not local
 			  if (protocol_type !== "local") {
-				  	$(document).ready(function () {
 				  console.log("Detected on running on server");
 				 // typical fetch
-				 var data = $.getJSON( "example.json", function(data) {
-						return data
-					})
-					
-					console.log("This is data")
-					console.log(data);
+			var data = fetch('data.json')
+			.then(response => response.json())
+			.then(data => {
+				console.log("Called!")
+				console.log(data)
+				return data
+					// True = Generate charts; False = Just returns data
+				if (state == true) {
 					var t = 1;
 					for (var i = 0; i < data.chartData.length; i++) {
 						generateChart("chart-node-" + t, data.chartData[i])
 						t++
+
 					}
-			  })
+				}
+			})
+			console.log("Jsondata value:")
+			console.log(data);
 			  } else {
 			  $('#local-client').modal('toggle');
 			  var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
@@ -306,6 +312,8 @@ input.click();
 			  }, false);
 
 			  };
+	});
+	return jsonData
 }
 
 function appendContainer(id, container) {
