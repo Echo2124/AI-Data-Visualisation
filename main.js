@@ -258,9 +258,12 @@ function fetchChartData(state) {
 				  	$(document).ready(function () {
 				  console.log("Detected on running on server");
 				 // typical fetch
-				 var data = jQuery.getJSON('data.json', function(data) {
-					 return data
-					});
+				 var data = $.getJSON( "example.json", function(data) {
+						return data
+					})
+					
+					console.log("This is data")
+					console.log(data);
 					var t = 1;
 					for (var i = 0; i < data.chartData.length; i++) {
 						generateChart("chart-node-" + t, data.chartData[i])
