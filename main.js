@@ -345,6 +345,7 @@ if (local_data == "" || local_data == null || local_data == undefined) {
 		data = fetchChartData(false);
 	} else {
 		data = local_data;
+		console.log("retreiving from cache");
 	};
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
 	var node_modal_Body = document.getElementsByClassName("modal-body")[0];
