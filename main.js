@@ -196,8 +196,6 @@ function splashscreen(msg, effect) {
 		break;
 	}
 
-
-
 	setInterval(function () {
 		var salt = Math.floor(Math.random() * 10);
 		progress += 3 + salt;
@@ -245,9 +243,9 @@ function toggleSidebar() {
 	}
 }
 
-function fetchChartData(state) {
+ function fetchChartData(state) {
 	var protocol_type;
-	var jsonData;
+	var json_data;
 	 if (window.location.protocol == "file:") {
 		 protocol_type = "local";
 	 } else {
@@ -258,22 +256,16 @@ function fetchChartData(state) {
 			  if (protocol_type !== "local") {
 				  console.log("Detected on running on server");
 				 // typical fetch
-			var data = fetch('data.json')
-			.then(response => response.json())
-			.then(data => {
-				console.log("Called!")
-				console.log(data)
-				return data
+				 fetch("data.json").then(res => res.json()).then(data => json_data = data).then(() => console.log(jsonData))
+				 console.log(jsonData)
 					// True = Generate charts; False = Just returns data
 				if (state == true) {
 					var t = 1;
 					for (var i = 0; i < data.chartData.length; i++) {
 						generateChart("chart-node-" + t, data.chartData[i])
 						t++
-
 					}
 				}
-			})
 			console.log("Jsondata value:")
 			console.log(data);
 			  } else {
@@ -301,13 +293,10 @@ input.onchange = e => {
 					for (var i = 0; i < content.chartData.length; i++) {
 						generateChart("chart-node-" + t, content.chartData[i])
 						t++
-
 					}
 				}
    }
-
 }
-
 input.click();
 			  }, false);
 
