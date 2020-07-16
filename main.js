@@ -254,7 +254,6 @@ function fetchChartData(state) {
 		 protocol_type = "server";
 	 };
 	$(document).ready(function () {
-		console.log("paSsed");
 		// if not local
 			  if (protocol_type !== "local") {
 				  console.log("Detected on running on server");
@@ -275,6 +274,8 @@ function fetchChartData(state) {
 					}
 				}
 			})
+			console.log("Jsondata value:")
+			console.log(jsonData)
 			  } else {
 			  $('#local-client').modal('toggle');
 			  var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
