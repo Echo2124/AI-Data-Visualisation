@@ -111,6 +111,7 @@
                  "Yes",
                  "No"
                ],
+			   "text":"Whatever text for usages of Recommendations",
                "datasets":[
                   {
                     "fill": true,
@@ -153,7 +154,7 @@
                 "Amazon Echo",
                 "Apple Homepod"
                ],
-               "text":"Whatever text for usages of ai",
+               "text":"Whatever text for usages of Digital Assistants",
                "datasets":[
                   {
                     "fill": true,
