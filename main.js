@@ -247,35 +247,26 @@ function toggleSidebar() {
 
 function fetchChartData(state) {
 	var protocol_type;
-	var jsonData;
+	var data;
 	 if (window.location.protocol == "file:") {
 		 protocol_type = "local";
 	 } else {
 		 protocol_type = "server";
 	 };
-	$(document).ready(function () {
 		// if not local
 			  if (protocol_type !== "local") {
+				  	$(document).ready(function () {
 				  console.log("Detected on running on server");
 				 // typical fetch
-			fetch('data.json')
-			.then(response => response.json())
-			.then(data => {
-				console.log("Called!")
-				console.log(data)
-				jsonData = data;
-					// True = Generate charts; False = Just returns data
-				if (state == true) {
+				 var data = jQuery.getJSON('data.json', function(data) {
+					 return data
+					});
 					var t = 1;
 					for (var i = 0; i < data.chartData.length; i++) {
 						generateChart("chart-node-" + t, data.chartData[i])
 						t++
-
 					}
-				}
-			})
-			console.log("Jsondata value:")
-			console.log(jsonData)
+			  })
 			  } else {
 			  $('#local-client').modal('toggle');
 			  var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
@@ -312,8 +303,6 @@ input.click();
 			  }, false);
 
 			  };
-	});
-	return jsonData
 }
 
 function appendContainer(id, container) {
