@@ -255,6 +255,7 @@ function fetchChartData(state) {
 	$(document).ready(function () {
 		// if not local
 			  if (protocol_type !== "local") {
+				  console.log("Detected on running on server");
 				 // typical fetch
 			fetch('data.json')
 			.then(response => response.json())
