@@ -343,8 +343,6 @@ function generateNodePanelInfo(NodeID) {
 	// check if there is any cached local data
 	var data;
 if (local_data == "" || local_data == null || local_data == undefined) {
-	console.log("Fetch data returns:");
-	console.log(fetchChartData(false));
 		data = fetchChartData(false);
 	} else {
 		data = local_data;
