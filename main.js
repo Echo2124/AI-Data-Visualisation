@@ -247,6 +247,7 @@ function toggleSidebar() {
 
 function fetchChartData(state) {
 	var protocol_type;
+	var jsonData;
 	 if (window.location.protocol == "file:") {
 		 protocol_type = "local";
 	 } else {
@@ -261,7 +262,8 @@ function fetchChartData(state) {
 			.then(response => response.json())
 			.then(data => {
 				console.log("Called!")
-				console.log(data.chartData[0].contents[0].datasets[0].backgroundColor)
+				console.log(data)
+				jsonData = data;
 					// True = Generate charts; False = Just returns data
 				if (state == true) {
 					var t = 1;
@@ -271,7 +273,6 @@ function fetchChartData(state) {
 
 					}
 				}
-				return data;
 			})
 			  } else {
 			  $('#local-client').modal('toggle');
@@ -292,6 +293,7 @@ input.onchange = e => {
    reader.onload = readerEvent => {
       var content = JSON.parse(readerEvent.target.result) // this is the content!
 	  local_data = content;
+	  jsonData = content;
 	  				if (state == true) {
 					var t = 1;
 					for (var i = 0; i < content.chartData.length; i++) {
@@ -300,7 +302,6 @@ input.onchange = e => {
 
 					}
 				}
-      return content
    }
 
 }
@@ -310,7 +311,7 @@ input.click();
 
 			  };
 	});
-
+	return jsonData
 }
 
 function appendContainer(id, container) {
