@@ -254,6 +254,7 @@ function fetchChartData(state) {
 		 protocol_type = "server";
 	 };
 	$(document).ready(function () {
+		console.log("paSsed");
 		// if not local
 			  if (protocol_type !== "local") {
 				  console.log("Detected on running on server");
