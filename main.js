@@ -10,6 +10,11 @@ Create a backup of current dependecies in local repository if remote ones are un
 might to create a single function to retreive json information instead of using two in order to streamline code.
 */
 
+/* candidate chart colours
+
+#E05759,#4D89CA,#149B51,#D66A31
+*/
+
 // Global Vars
 var sidebar_mini = true;
 var default_config = {
@@ -428,6 +433,7 @@ function generateChart(nodeName, chart) {
 		return j
 	})
 	var chartOptions = chart.contents[0].options.map(function (a) {
+		console.log(a)
 		return a
 	})
 	console.log(chartOptions)
@@ -443,7 +449,7 @@ function generateChart(nodeName, chart) {
 		},
 
 		// Configuration options go here
-		options: chartOptions[0],
+		options: chartOptions,
 	}
 	var chart = new Chart(ctx, config);
 	$(targetNode).prepend(currentNode)

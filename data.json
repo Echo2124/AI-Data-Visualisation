@@ -40,6 +40,18 @@
                       "text":"Testing text",
                       "position":"top"
                     }
+                  ],
+                  "layout":[
+                    {
+                    "padding": [
+                      {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    ]
+                    }
                   ]
                   }
                ]
@@ -96,6 +108,18 @@
                       "text":"Testing text",
                       "position":"top"
                     }
+                  ],
+                  "layout":[
+                    {
+                    "padding": [
+                      {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    ]
+                    }
                   ]
                   }
                ]
@@ -137,6 +161,18 @@
                       "display": true,
                       "text":"Testing text",
                       "position":"top"
+                    }
+                  ],
+                  "layout":[
+                    {
+                    "padding": [
+                      {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    ]
                     }
                   ]
                   }
@@ -183,6 +219,18 @@
                       "display": true,
                       "text":"Testing text",
                       "position":"top"
+                    }
+                  ],
+                  "layout":[
+                    {
+                    "padding": [
+                      {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    ]
                     }
                   ]
                   }
@@ -233,6 +281,18 @@
                       "display": true,
                       "text":"Testing text",
                       "position":"top"
+                    }
+                  ],
+                  "layout":[
+                    {
+                    "padding": [
+                      {
+                        "left": 0,
+                        "right": 0,
+                        "top": 0,
+                        "bottom": 0
+                      }
+                    ]
                     }
                   ]
                   }
