@@ -18,8 +18,8 @@ var default_config = {
 	loading_screen_anim: "particle", // options = polygonal, particle
 	night_mode: true
 }
-// used as a cache for later uses of the data such as the node panels
-var local_data;
+// used as a simple cache for later uses of the data such as the node panels
+var dataCache;
 
 function init() {
 	console.log("Initialising...");
@@ -36,7 +36,13 @@ function init() {
 	}
 	// Appends overview menu by default when page is loaded
 	appendContainer("sidebar-Home", "container-overview");
-	fetchChartData(true);
+		if (window.location.protocol !== "file:") {
+			// typical method
+				fetchJSONdata()
+		} else {
+			// alt method
+			getLocalJSONData()
+		}
 	document.getElementById("discard").addEventListener("click", function () {
 		if (cookies_state == false) {
 			// overrides existings settings with default as there are no custom settings
@@ -243,66 +249,50 @@ function toggleSidebar() {
 	}
 }
 
- function fetchChartData(state) {
-	var protocol_type;
-	var json_data;
-	 if (window.location.protocol == "file:") {
-		 protocol_type = "local";
-	 } else {
-		 protocol_type = "server";
-	 };
-	$(document).ready(function () {
-		// if not local
-			  if (protocol_type !== "local") {
-				  console.log("Detected on running on server");
-				 // typical fetch
-				 fetch("data.json").then(res => res.json()).then(data => json_data = data).then(() => console.log(jsonData))
-				 console.log(jsonData)
-					// True = Generate charts; False = Just returns data
-				if (state == true) {
-					var t = 1;
-					for (var i = 0; i < data.chartData.length; i++) {
-						generateChart("chart-node-" + t, data.chartData[i])
-						t++
-					}
-				}
-			console.log("Jsondata value:")
-			console.log(data);
-			  } else {
-			  $('#local-client').modal('toggle');
-			  var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
-				  var input = document.createElement('input');
+
+// If the website is running locally using file uri protocol
+function getLocalJSONData() {
+	$('#local-client').modal('toggle');
+	var btnConfirm = document.getElementById("local-confirm").addEventListener("click", function() {
+	var input = document.createElement('input');
 input.type = 'file';
 input.setAttribute("accept", ".json");
 input.onchange = e => {
-
-   // getting a hold of the file reference
-   var file = e.target.files[0];
-
-   // setting up the reader
-   var reader = new FileReader();
-   reader.readAsText(file,'UTF-8');
-
-   // here we tell the reader what to do when it's done reading...
-   reader.onload = readerEvent => {
-      var content = JSON.parse(readerEvent.target.result) // this is the content!
-	  local_data = content;
-	  jsonData = content;
-	  				if (state == true) {
-					var t = 1;
-					for (var i = 0; i < content.chartData.length; i++) {
-						generateChart("chart-node-" + t, content.chartData[i])
-						t++
-					}
-				}
-   }
+var file = e.target.files[0];
+var reader = new FileReader();
+reader.readAsText(file,'UTF-8');
+reader.onload = readerEvent => {
+var content = JSON.parse(readerEvent.target.result)
+// caches data for future uses in current session
+dataCache = content;
+		var t = 1;
+		for (var i = 0; i < content.chartData.length; i++) {
+			generateChart("chart-node-" + t, content.chartData[i])
+			t++
+		}
+}
 }
 input.click();
-			  }, false);
+	}, false);
+}
 
-			  };
-	});
-	return jsonData
+
+// If the website is hosted on a server then use this method
+function fetchJSONdata() {
+	$(document).ready(function () {
+					console.log("Detected on running on server");
+					fetch('data.json')
+  				.then(response => response.json())
+  				.then(data => {
+						var t = 1;
+						for (var i = 0; i < data.chartData.length; i++) {
+							generateChart("chart-node-" + t, data.chartData[i])
+							t++
+						}
+						dataCache = data;
+					});
+			console.log("Jsondata value:")
+})
 }
 
 function appendContainer(id, container) {
@@ -331,18 +321,11 @@ function appendContainer(id, container) {
 
 // TODO: Clean this function up and use a seperate function for fetch the JSON data
 function generateNodePanelInfo(NodeID) {
+	var data = dataCache;
 	// check if there is any cached local data
-	var data;
-if (local_data == "" || local_data == null || local_data == undefined) {
-		data = fetchChartData(false);
-	} else {
-		data = local_data;
-		console.log("retreiving from cache");
-	};
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
 	var node_modal_Body = document.getElementsByClassName("modal-body")[0];
 	console.log("Displaying data:");
-	console.log(data);
 // call fetch data function
 				switch (NodeID) {
 				case "chart-node-1":
@@ -448,7 +431,7 @@ function generateChart(nodeName, chart) {
 		return a
 	})
 	console.log(chartOptions)
-	var standard_config = {
+	var config = {
 		// The type of chart we want to create
 		type: chart.type,
 		// The data for dataset
@@ -462,6 +445,6 @@ function generateChart(nodeName, chart) {
 		// Configuration options go here
 		options: chartOptions[0],
 	}
-	var chart = new Chart(ctx, standard_config);
+	var chart = new Chart(ctx, config);
 	$(targetNode).prepend(currentNode)
 }
