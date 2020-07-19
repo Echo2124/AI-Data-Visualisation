@@ -323,6 +323,14 @@ function appendContainer(id, container) {
 	}
 }
 
+function prepNodePanels() {
+	var chart_1 = document.getElementById("chart-node-1");
+	var chart_2 = document.getElementById("chart-node-2");
+	var chart_3 = document.getElementById("chart-node-3");
+	var chart_4 = document.getElementById("chart-node-4");
+	var chart_5 = document.getElementById("chart-node-5");
+	// prep for double click
+}
 
 // TODO: Clean this function up and use a seperate function for fetch the JSON data
 function generateNodePanelInfo(NodeID) {
