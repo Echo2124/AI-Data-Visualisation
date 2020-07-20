@@ -27,6 +27,7 @@ var default_config = {
 var dataCache;
 
 function init() {
+		$(document).ready(function () {
 	console.log("Initialising...");
 	var cookies = document.cookie;
 	var cookies_state;
@@ -57,8 +58,9 @@ function init() {
 		}
 		appendContainer("sidebar-Home", "container-overview");
 	}, false)
-
+	prepNodePanels();
 	document.getElementById("apply").addEventListener("click", writeCustomSettings, false);
+	});
 };
 init();
 
@@ -324,16 +326,23 @@ function appendContainer(id, container) {
 }
 
 function prepNodePanels() {
-	var chart_1 = document.getElementById("chart-node-1");
-	var chart_2 = document.getElementById("chart-node-2");
-	var chart_3 = document.getElementById("chart-node-3");
-	var chart_4 = document.getElementById("chart-node-4");
-	var chart_5 = document.getElementById("chart-node-5");
+	console.log("Testing")
+	var charts = document.getElementsByClassName("node-containers");
+for (var i = 0; i < charts.length; i++) {
+	charts[i].addEventListener("dblclick", function(e) {
+		var chart = e.currentTarget.id;
+		console.log(chart)
+		$('#node-panel').modal('show');
+		generateNodePanelInfo(chart);
+	}, false)
+}
 	// prep for double click
 }
 
 // TODO: Clean this function up and use a seperate function for fetch the JSON data
 function generateNodePanelInfo(NodeID) {
+	console.log("Generate panel")
+	console.log("THis is node id" + NodeID)
 	var data = dataCache;
 	// check if there is any cached local data
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
