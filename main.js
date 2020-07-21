@@ -445,6 +445,7 @@ function generateChart(nodeName, chart) {
 	var targetNode = document.getElementById(nodeName)
 	var currentNode = document.createElement("canvas");
 	currentNode.classList.add("node-graph");
+	//currentNode.responsive = true;
 	var ctx = currentNode.getContext('2d');
 	var data = chart.contents[0].datasets.map(function (j) {
 		return j
@@ -465,9 +466,22 @@ function generateChart(nodeName, chart) {
 
 		},
 
+	options: {
+legend: {
+    	display: false
+    },
+        title: {
+            display: true,
+            text: chart.category,
+			position: "top",
+			fontSize: 18
+        }
+    }
 		// Configuration options go here
-		options: chartOptions,
 	}
+	Chart.defaults.global.defaultFontFamily = "Quicksand"
+	Chart.defaults.global.defaultFontStyle	= "normal"
+	Chart.defaults.global.defaultFontColor = "#ffffff"
 	var chart = new Chart(ctx, config);
 	$(targetNode).prepend(currentNode)
 }
