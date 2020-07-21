@@ -163,6 +163,7 @@ main .sidebar {
   right: 20px;
   font-size: 36px;
   margin-left: 20px;
+  min-height: 100%;
 }
 
 .icon-text {
