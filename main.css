@@ -28,6 +28,10 @@
   white-space: nowrap;
 }
 
+.btm-charts {
+	min-height: 100%;
+	min-width: 100%;
+
 .modal-lg {
     max-width: 80%;
     max-height: 80%;
