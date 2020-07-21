@@ -69,13 +69,13 @@ media screen and (min-width: 768px) {
     }
 
 .fade {
-  background-color: rgba(0,0,0,.8);
+     box-shadow: inset 0 0 2000px rgba(255, 255, 255, .2);
 }
 
 
 
 .node-panel-bg {
-  background-color: rgba(255,255,255,0.4);
+  background-color: rgba(50,50,70,0.97);
 }
 
 #mdl-h-divider {
