@@ -399,6 +399,30 @@ function generateNodePanelInfo(NodeID) {
 			document.getElementById("divCol").appendChild(divider)
 		}
 
+	
+		function appendTabs() {
+			var header = document.createElement("ul");
+			header.classList.add("nav");
+			header.classList.add("nav-tabs");
+			var tab_1 = document.createElement("li");
+			tab_1.classList.add("nav-item");
+			var tab_1_child = document.createElement("a");
+			tab_1_child.classList.add("nav-link");
+			tab_1_child.setAttribute("href", "#");
+			tab_1_child.innerText = "Graph";
+			tab_1.appendChild(tab_1_child);
+			var tab_2 = document.createElement("li");
+			tab_2.classList.add("nav-item");
+			var tab_2_child = document.createElement("a");
+			tab_2_child.classList.add("nav-link");
+			tab_2_child.setAttribute("href", "#");
+			tab_2_child.innerText = "Table";
+			tab_2.appendChild(tab_2_child);
+			header.appendChild(tab_1);
+			header.appendChild(tab_2);
+			node_modal_Body.appendChild(header);
+		};
+
 		function clearMdl() {
 			// clears everything-
 			node_modal_Title.innerText = "";
@@ -409,6 +433,7 @@ function generateNodePanelInfo(NodeID) {
 
 		function setupMdl() {
 			clearMdl();
+			appendTabs();
 			// generate grid
 			var container = document.createElement("div");
 			container.classList.add("container");
