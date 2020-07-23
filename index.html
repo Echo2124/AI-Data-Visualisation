@@ -58,7 +58,6 @@
 		</a>
 		<br>
 	</div>
-	<!-- Should keep this as it is targeted within css -->
 	<div id="main">
 		<div id="container-overview" class="main-container">
 			<div class="container primary-container">
@@ -200,6 +199,21 @@
       </div>
     </div>
   </div>
+</div>
+<div class="modal" id="local-client-settings" tabindex="1" role="dialog">
+<div class="modal-dialog" role="document">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title">Local Client Detected!</h5>
+		</div>
+		<div class="modal-body">
+			<p>Settings functionality will not save due to the lack of the ability to save cookies when working with local html files. This is a limitation of the URI protocol. You can still change settings but it will only apply for the current session. (when you close the current tab all changes will be reset)</p>
+		</div>
+		<div class="modal-footer">
+			<button id="local-confirm" type="button" class="btn btn-primary" data-dismiss="modal">Okay</button>
+		</div>
+	</div>
+</div>
 </div>
 	<script src="plugins/jquery.animated-bg.js"></script>
 	<script src="plugins/particles.js"></script>

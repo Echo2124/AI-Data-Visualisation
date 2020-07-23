@@ -309,7 +309,14 @@ function appendContainer(id, container) {
 		containers[i].style.display = "none";
 		containers[i].addClass
 	}
+	if (window.location.protocol == "file:" && container == "container-settings") {
+		console.log("trigger")
+		// trigger modal
+		$("#local-client-settings").modal('show');
+			curContainer.style.display = "initial";
+} else {
 	curContainer.style.display = "initial";
+}
 	console.debug("id: " + id)
 	$(".material-icons").removeClass("icon-selected")
 	switch (id) {
@@ -399,25 +406,38 @@ function generateNodePanelInfo(NodeID) {
 			document.getElementById("divCol").appendChild(divider)
 		}
 
-	
+
 		function appendTabs() {
-			var header = document.createElement("ul");
-			header.classList.add("nav");
-			header.classList.add("nav-tabs");
-			var tab_1 = document.createElement("li");
-			tab_1.classList.add("nav-item");
-			var tab_1_child = document.createElement("a");
-			tab_1_child.classList.add("nav-link");
-			tab_1_child.setAttribute("href", "#");
-			tab_1_child.innerText = "Graph";
-			tab_1.appendChild(tab_1_child);
-			var tab_2 = document.createElement("li");
-			tab_2.classList.add("nav-item");
-			var tab_2_child = document.createElement("a");
-			tab_2_child.classList.add("nav-link");
-			tab_2_child.setAttribute("href", "#");
-			tab_2_child.innerText = "Table";
-			tab_2.appendChild(tab_2_child);
+			var header = document.createElement("div");
+			header.classList.add("btn-group");
+			header.setAttribute("role", "group");
+			header.setAttribute("aria-label", "View Switch")
+			var tab_1 = document.createElement("button");
+			tab_1.classList.add("btn");
+			tab_1.classList.add("btn-secondary");
+			tab_1.classList.add("active");
+			tab_1.setAttribute("type", "button");
+			tab_1.innerText = "Graph";
+			var tab_2 = document.createElement("button");
+			tab_2.classList.add("btn");
+			tab_2.classList.add("btn-secondary");
+			tab_2.setAttribute("type", "button");
+			tab_2.innerText = "Table";
+			tab_1.addEventListener("click", function() {
+				// add table here
+				var table;
+				var graph = document.querySelector("#graphCol > canvas:nth-child(2)");
+				graph.style.display = "unset"
+				// might need to check if tab_1 is still selected in order to avoid running this unnecessarily
+			}, false)
+			tab_2.addEventListener("click", function() {
+				// add table here
+				var table;
+				var graph = document.querySelector("#graphCol > canvas:nth-child(2)")
+				console.log(graph)
+				graph.style.display = "none";
+				console.log("tab 2 hit")
+			}, false)
 			header.appendChild(tab_1);
 			header.appendChild(tab_2);
 			node_modal_Body.appendChild(header);
