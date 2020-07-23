@@ -97,7 +97,9 @@ function writeCustomSettings() {
     "loading_screen_anim": opt_load,
     "night_mode": opt_night_mode
   };
-  document.cookie = "settings=" + JSON.stringify(config_object);
+  var cur = new Date();
+  cur.setFullYear(cur.getFullYear() + 1);
+  document.cookie = "settings=" + JSON.stringify(config_object) + ";" + "expires=" + cur.toUTCString();
   location.reload();
 }
 
