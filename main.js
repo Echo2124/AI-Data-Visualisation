@@ -276,7 +276,7 @@ var content = JSON.parse(readerEvent.target.result)
 dataCache = content;
 		var t = 1;
 		for (var i = 0; i < content.chartData.length; i++) {
-			generateChart("chart-node-" + t, content.chartData[i])
+			generateChart("chart-node-" + t, content.chartData[i], "")
 			t++
 		}
 }
@@ -295,7 +295,7 @@ function fetchJSONdata() {
   				.then(data => {
 						var t = 1;
 						for (var i = 0; i < data.chartData.length; i++) {
-							generateChart("chart-node-" + t, data.chartData[i])
+							generateChart("chart-node-" + t, data.chartData[i], "")
 							t++
 						}
 						dataCache = data;
@@ -362,31 +362,31 @@ function generateNodePanelInfo(NodeID) {
 				case "chart-node-1":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[0].category;
-					generateChart("graphCol", data.chartData[0]);
+					generateChart("graphCol", data.chartData[0], "node-panel");
 					appendText(NodeID, "textCol", data.chartData[0])
 					break;
 				case "chart-node-2":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[1].category;
-					generateChart("graphCol", data.chartData[1]);
+					generateChart("graphCol", data.chartData[1], "node-panel");
 					appendText(NodeID, "textCol", data.chartData[1])
 					break;
 				case "chart-node-3":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[2].category;
-					generateChart("graphCol", data.chartData[2]);
+					generateChart("graphCol", data.chartData[2], "node-panel");
 					appendText(NodeID, "textCol", data.chartData[2])
 					break;
 				case "chart-node-4":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[3].category;
-					generateChart("graphCol", data.chartData[3]);
+					generateChart("graphCol", data.chartData[3], "node-panel");
 					appendText(NodeID, "textCol", data.chartData[3])
 					break;
 				case "chart-node-5":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[4].category;
-					generateChart("graphCol", data.chartData[4]);
+					generateChart("graphCol", data.chartData[4], "node-panel");
 					appendText(NodeID, "textCol", data.chartData[4])
 				}
 
@@ -488,7 +488,7 @@ function generateNodePanelInfo(NodeID) {
 }
 
 
-function generateChart(nodeName, chart) {
+function generateChart(nodeName, chart, type) {
 	var targetNode = document.getElementById(nodeName)
 	var currentNode = document.createElement("canvas");
 	currentNode.classList.add("node-graph");
@@ -526,9 +526,38 @@ legend: {
     }
 		// Configuration options go here
 	}
+	
+	var node_config = {
+				// The type of chart we want to create
+		type: chart.type,
+		// The data for dataset
+
+		data: {
+			labels: chart.contents[0].labels,
+			datasets: data,
+
+		},
+
+	options: {
+legend: {
+    	display: true
+    },
+        title: {
+            display: true,
+            text: chart.category,
+			position: "top",
+			fontSize: 18
+        }
+    }
+		// Configuration options go here
+	};
 	Chart.defaults.global.defaultFontFamily = "Quicksand"
 	Chart.defaults.global.defaultFontStyle	= "normal"
 	Chart.defaults.global.defaultFontColor = "#ffffff"
+	if (type !== "node-panel") {
 	var chart = new Chart(ctx, config);
+	} else {
+		var chart = new Chart(ctx, node_config);
+	};
 	$(targetNode).prepend(currentNode)
 }
