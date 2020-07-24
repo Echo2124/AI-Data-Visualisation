@@ -138,10 +138,14 @@ function apply_settings(config) {
 		document.getElementsByTagName("body")[0].classList.add("default_gradient");
 		break;
 		// set to whatever other gradient
-	case "white":
-		for (var i = 0; i < panels.length; i++) {
-			document.getElementById(panels[i]).classList.add("light_panels");
-		}
+	case "default_anim":
+	document.getElementsByTagName("body")[0].classList.add("default_gradient_anim");
+	break;
+	case "sunset":
+	document.getElementsByTagName("body")[0].classList.add("sunset_gradient");
+	break;
+	case "sunset_anim":
+		document.getElementsByTagName("body")[0].classList.add("sunset_gradient_anim");
 	}
 	if (config.night_mode == true) {
 		var offset = 0; // offset value (for testing)
