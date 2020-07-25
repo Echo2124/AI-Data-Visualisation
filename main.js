@@ -361,36 +361,42 @@ function generateNodePanelInfo(NodeID) {
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
 	var node_modal_Body = document.getElementsByClassName("modal-body")[0];
 	console.log("Displaying data:");
+console.log(data.chartData[0])
 // call fetch data function
 				switch (NodeID) {
 				case "chart-node-1":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[0].category;
 					generateChart("graphCol", data.chartData[0], "node-panel");
-					appendText(NodeID, "textCol", data.chartData[0])
+					generateTable("graphCol", data.chartData[0]);
+					appendText(NodeID, "textCol", data.chartData[0]);
 					break;
 				case "chart-node-2":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[1].category;
 					generateChart("graphCol", data.chartData[1], "node-panel");
-					appendText(NodeID, "textCol", data.chartData[1])
+					generateTable("graphCol", data.chartData[1]);
+					appendText(NodeID, "textCol", data.chartData[1]);
 					break;
 				case "chart-node-3":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[2].category;
 					generateChart("graphCol", data.chartData[2], "node-panel");
+					generateTable("graphCol", data.chartData[2]);
 					appendText(NodeID, "textCol", data.chartData[2])
 					break;
 				case "chart-node-4":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[3].category;
 					generateChart("graphCol", data.chartData[3], "node-panel");
+					generateTable("graphCol", data.chartData[3]);
 					appendText(NodeID, "textCol", data.chartData[3])
 					break;
 				case "chart-node-5":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[4].category;
 					generateChart("graphCol", data.chartData[4], "node-panel");
+					generateTable("graphCol", data.chartData[4]);
 					appendText(NodeID, "textCol", data.chartData[4])
 				}
 
@@ -431,17 +437,19 @@ function generateNodePanelInfo(NodeID) {
 			tab_2.innerText = "Table";
 			tab_1.addEventListener("click", function() {
 				// add table here
-				var table;
+				var table = document.getElementById("chart_table");
+				table.style.display = "none";
 				var graph = document.querySelector("#graphCol > canvas:nth-child(2)");
 				graph.style.display = "unset"
 				// might need to check if tab_1 is still selected in order to avoid running this unnecessarily
 			}, false)
 			tab_2.addEventListener("click", function() {
 				// add table here
-				var table;
+				var table = document.getElementById("chart_table");
 				var graph = document.querySelector("#graphCol > canvas:nth-child(2)")
 				console.log(graph)
 				graph.style.display = "none";
+				table.style.display = "unset";
 				console.log("tab 2 hit")
 			}, false)
 			header.appendChild(tab_1);
@@ -476,7 +484,7 @@ function generateNodePanelInfo(NodeID) {
 			var thirdCol = document.createElement("div");
 			var infoTitle = document.createElement("h3");
 			var divider = document.createElement("hr");
-			divider.id = "mdl-h-divider"
+			divider.id = "mdl-h-divider";
 			infoTitle.innerText = "Information";
 			thirdCol.classList.add("col-3");
 			thirdCol.classList.add("col-md-3")
@@ -489,11 +497,45 @@ function generateNodePanelInfo(NodeID) {
 			container.appendChild(row);
 			node_modal_Body.appendChild(container);
 		}
+
+		function generateTable(id, data) {
+			var target = document.getElementById(id);
+			var table = document.createElement("table");
+			table.style.display = "none";
+			table.id = "chart_table";
+			table.classList.add("table");
+			table.classList.add("table-borderless");
+			table.classList.add("table-dark");
+			var thead = document.createElement("thead");
+			var thead_tr = document.createElement("tr");
+			var tbody = document.createElement("tbody");
+			for (var i = 0; i < data.contents[0].labels.length; i++) {
+				var temp_th = document.createElement("th");
+				temp_th.innerText = data.contents[0].labels[i];
+				temp_th.setAttribute("scope", "col");
+				thead_tr.appendChild(temp_th);
+			}
+			for (var i = 0; i < data.contents[0].datasets.length; i++) {
+				var tbody_tr = document.createElement("tr");
+
+				for (var a = 0; a < data.contents[0].datasets[i]; a++) {
+					var tbody_th = document.createElement("th");
+					tbody_th.setAttribute("scope", "row");
+					tbody_th.innerText = data.contents[0].datasets[i].label;
+
+				}
+		}
+		thead.appendChild(thead_tr);
+		table.appendChild(thead);
+		target.appendChild(table)
+}
 }
 
 
 function generateChart(nodeName, chart, type) {
-	var targetNode = document.getElementById(nodeName)
+	var display_state;
+	var title;
+	var targetNode = document.getElementById(nodeName);
 	var currentNode = document.createElement("canvas");
 	currentNode.classList.add("node-graph");
 	//currentNode.responsive = true;
@@ -505,6 +547,18 @@ function generateChart(nodeName, chart, type) {
 		console.log(a)
 		return a
 	})
+
+		if (type !== "node-panel") {
+			display_state = false;
+			title = chart.category;
+		} else {
+			display_state = true;
+			if (chart.question !== "") {
+			title = chart.question;
+		} else {
+			title = chart.category;
+		}
+		}
 	console.log(chartOptions)
 	var config = {
 		// The type of chart we want to create
@@ -519,49 +573,21 @@ function generateChart(nodeName, chart, type) {
 
 	options: {
 legend: {
-    	display: false
+    	display: display_state
     },
         title: {
             display: true,
-            text: chart.category,
+            text: title,
 			position: "top",
 			fontSize: 18
         }
     }
 		// Configuration options go here
 	}
-	
-	var node_config = {
-				// The type of chart we want to create
-		type: chart.type,
-		// The data for dataset
 
-		data: {
-			labels: chart.contents[0].labels,
-			datasets: data,
-
-		},
-
-	options: {
-legend: {
-    	display: true
-    },
-        title: {
-            display: true,
-            text: chart.category,
-			position: "top",
-			fontSize: 18
-        }
-    }
-		// Configuration options go here
-	};
 	Chart.defaults.global.defaultFontFamily = "Quicksand"
 	Chart.defaults.global.defaultFontStyle	= "normal"
 	Chart.defaults.global.defaultFontColor = "#ffffff"
-	if (type !== "node-panel") {
 	var chart = new Chart(ctx, config);
-	} else {
-		var chart = new Chart(ctx, node_config);
-	};
 	$(targetNode).prepend(currentNode)
 }
