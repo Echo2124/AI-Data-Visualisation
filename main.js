@@ -509,19 +509,29 @@ console.log(data.chartData[0])
 			var thead = document.createElement("thead");
 			var thead_tr = document.createElement("tr");
 			var tbody = document.createElement("tbody");
+			// placeholder col
+			var thead_th = document.createElement("th");
+			thead_th.setAttribute("scope", "col");
+			thead_tr.appendChild(thead_th)
 			for (var i = 0; i < data.contents[0].labels.length; i++) {
 				var temp_th = document.createElement("th");
 				temp_th.innerText = data.contents[0].labels[i];
 				temp_th.setAttribute("scope", "col");
 				thead_tr.appendChild(temp_th);
+				console.log("header state:" + i);
 			}
 			for (var i = 0; i < data.contents[0].datasets.length; i++) {
 				var tbody_tr = document.createElement("tr");
 
+				// handles row title
 				for (var a = 0; a < data.contents[0].datasets[i]; a++) {
 					var tbody_th = document.createElement("th");
 					tbody_th.setAttribute("scope", "row");
 					tbody_th.innerText = data.contents[0].datasets[i].label;
+					
+					if (var b = 0; b < data.contents[0].datasets[i - 1]; b++) {
+						
+					}
 
 				}
 		}
