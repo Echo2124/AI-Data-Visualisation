@@ -504,13 +504,14 @@ console.log(data.chartData[0])
 			table.style.display = "none";
 			table.id = "chart_table";
 			table.classList.add("table");
-			table.classList.add("table-borderless");
+			
 			table.classList.add("table-dark");
 			var thead = document.createElement("thead");
 			var thead_tr = document.createElement("tr");
 			var tbody = document.createElement("tbody");
 			// placeholder col
 			var thead_th = document.createElement("th");
+			thead_th.innerText = "Label";
 			thead_th.setAttribute("scope", "col");
 			thead_tr.appendChild(thead_th)
 			for (var i = 0; i < data.contents[0].labels.length; i++) {
@@ -520,23 +521,39 @@ console.log(data.chartData[0])
 				thead_tr.appendChild(temp_th);
 				console.log("header state:" + i);
 			}
+			var thead_th_total = document.createElement("th");
+			thead_th_total.innerText = "Total";
+			thead_th_total.setAttribute("scope", "col");;
+			thead_tr.appendChild(thead_th_total);
+			console.log("datasets length: " + data.contents[0].datasets.length);
 			for (var i = 0; i < data.contents[0].datasets.length; i++) {
 				var tbody_tr = document.createElement("tr");
-
-				// handles row title
-				for (var a = 0; a < data.contents[0].datasets[i]; a++) {
 					var tbody_th = document.createElement("th");
 					tbody_th.setAttribute("scope", "row");
 					tbody_th.innerText = data.contents[0].datasets[i].label;
-					
-					if (var b = 0; b < data.contents[0].datasets[i - 1]; b++) {
-						
-					}
-
+					tbody_tr.appendChild(tbody_th);
+				// handles individual data
+				for (var a = 0; a < data.contents[0].datasets[i].data.length; a++) {
+					var tbody_td = document.createElement("td");
+					tbody_td.innerText = data.contents[0].datasets[i].data[a];
+					tbody_tr.appendChild(tbody_td);
 				}
+				
+				// totals values
+				var tbody_td_total = document.createElement("td");
+				var tbody_tr_tds = tbody_tr.getElementsByTagName("td");
+				var total;
+				for (var b = 0; b < tbody_tr_tds.length; b++) {
+					console.log("value" + tbody_tr_tds[b].innerText);
+					total += tbody_tr_tds[b].innerText;
+				};
+				console.log("Total: " + total);
+				tbody_tr.appendChild(tbody_td_total)
+				tbody.appendChild(tbody_tr);
 		}
 		thead.appendChild(thead_tr);
 		table.appendChild(thead);
+		table.appendChild(tbody);
 		target.appendChild(table)
 }
 }
