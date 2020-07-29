@@ -2,6 +2,7 @@
    "chartData":[
       {
          "category":"Usages of AI",
+         "question":"",
          "type":"bar",
          "contents":[
             {
@@ -60,6 +61,7 @@
       },
       {
          "category":"Finance",
+         "question":"",
          "type":"bar",
          "contents":[
             {
@@ -128,6 +130,7 @@
       },
       {
          "category":"Recommendations",
+         "question":"Have you ever been served targeted ads? (e.g. product recommendations)",
          "type":"pie",
          "contents":[
             {
@@ -182,6 +185,7 @@
       },
       {
          "category":"Digital Assistants",
+         "question":"Do you own any of the following smart speakers?",
          "type":"doughnut",
          "contents":[
             {
@@ -240,6 +244,7 @@
       },
       {
          "category":"Social Media",
+         "question":"Do you use any of the following social networking sites?",
          "type":"pie",
          "contents":[
             {
