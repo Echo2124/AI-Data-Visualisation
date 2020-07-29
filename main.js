@@ -541,21 +541,21 @@ console.log(data.chartData[0])
 				
 				// totals values
 				var tbody_td_total = document.createElement("td");
-				var tbody_tr_tds = tbody_tr.getElementsByTagName("td");
-				var total;
-				for (var b = 0; b < tbody_tr_tds.length; b++) {
-					console.log("value" + tbody_tr_tds[b].innerText);
-					total += tbody_tr_tds[b].innerText;
 				};
-				console.log("Total: " + total);
-				tbody_tr.appendChild(tbody_td_total)
+				var total;
+				console.log("length" + tbody_tr.length);
+				for (var b; b < tbody_tr.length; b++) {
+				 total += Number(tbody_tr[b].outerText);
+				};
+				console.log(total);
+				tbody_td_total.innerText = total;
+				tbody_tr.appendChild(tbody_td_total);
 				tbody.appendChild(tbody_tr);
-		}
 		thead.appendChild(thead_tr);
 		table.appendChild(thead);
 		table.appendChild(tbody);
 		target.appendChild(table)
-}
+} 
 }
 
 
