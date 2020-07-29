@@ -538,7 +538,7 @@ console.log(data.chartData[0])
 					tbody_td.innerText = data.contents[0].datasets[i].data[a];
 					tbody_tr.appendChild(tbody_td);
 				}
-				
+				// RECOMMENDED USE EACH() METHOD [JQUERY]
 				// totals values
 				var tbody_td_total = document.createElement("td");
 				};
