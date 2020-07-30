@@ -198,6 +198,10 @@ main .sidebar {
   transition: margin-left 0.5s;
 }
 
+#settings-con, #theme-settings, #adv-settings, #about {
+	border-radius: 10px;
+}
+
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;
