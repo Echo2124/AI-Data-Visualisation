@@ -32,11 +32,11 @@ function init() {
 	var cookies_state;
 	console.log("Cookies: " + cookies)
 	if (cookies == "null" || cookies == "" || cookies == null) {
-		splashscreen("First time setup! Initialising", default_config.loading_screen_anim)
+		splashscreen("First time setup! Initialising...", default_config.loading_screen_anim)
 		append_settings(default_config);
 		cookies_state = false;
 	} else {
-    splashscreen("Loading", fetchCustomSettings("settings").loading_screen_anim)
+    splashscreen("Loading...", fetchCustomSettings("settings").loading_screen_anim)
 		append_settings(fetchCustomSettings("settings"));
 	}
 	// Appends overview menu by default when page is loaded
