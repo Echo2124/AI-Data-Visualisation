@@ -542,12 +542,14 @@ console.log(data.chartData[0])
 				// totals values
 				var tbody_td_total = document.createElement("td");
 				var tbody_tr_tds = tbody_tr.getElementsByTagName("td");
-				var total;
-				for (var b = 0; b < tbody_tr_tds.length; b++) {
-					console.log("value" + tbody_tr_tds[b].innerText);
-					total += tbody_tr_tds[b].innerText;
-				};
-				console.log("Total: " + total);
+				var total = 0;
+				$(tbody_tr_tds).each(function() {
+				const cur = Number(this.innerText);
+			console.log(cur)
+				total += cur;
+				});
+				console.log(total);
+				tbody_td_total.innerText = total;
 				tbody_tr.appendChild(tbody_td_total)
 				tbody.appendChild(tbody_tr);
 		}
