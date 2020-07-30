@@ -132,18 +132,23 @@ function apply_settings(config) {
 	}
 
 	switch (config.gradient) {
+		// CONSIDER USING *THIS* IDENTIFIER TO CLEAN UP CODE
 	case "default":
 		document.getElementsByTagName("body")[0].classList.add("default_gradient");
+		document.getElementById("splashscreen").classList.add("default_gradient");
 		break;
 		// set to whatever other gradient
 	case "default_anim":
 	document.getElementsByTagName("body")[0].classList.add("default_gradient_anim");
+	document.getElementById("splashscreen").classList.add("default_gradient_anim");
 	break;
 	case "sunset":
 	document.getElementsByTagName("body")[0].classList.add("sunset_gradient");
+	document.getElementById("splashscreen").classList.add("sunset_gradient");
 	break;
 	case "sunset_anim":
 		document.getElementsByTagName("body")[0].classList.add("sunset_gradient_anim");
+		document.getElementById("splashscreen").classList.add("sunset_gradient_anim");
 	}
 	if (config.night_mode == true) {
 		var offset = 0; // offset value (for testing)
@@ -175,13 +180,6 @@ function splashscreen(msg, effect) {
 	var curText = splash_text.innerText
 	splash_text.innerText = msg;
 	var progress = 0;
-	// fix up ... animation later
-	/*
-  var loadanim = setInterval(function() {
-    if (splash_text.innerHTML += '.').length == 4)
-        splash_text.innerHTML = '';
-}, 500);
-*/
 
 	// MIGHT WANT TO DESTROY THESE OBJECTS AFTER SPLASHSCREEN HAS STOPPED AS THEY USE RESOURCES WHICH COULD BE FREED.
 	switch (effect) {
