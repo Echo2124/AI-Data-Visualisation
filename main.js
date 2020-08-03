@@ -106,7 +106,7 @@ function apply_settings(config) {
 	// apply settings here
 	var panels = [
 		"navbar",
-		"mySidebar",
+		"sidebar",
 		"chart-node-1",
 		"chart-node-2",
 		"chart-node-3",
@@ -240,7 +240,7 @@ function splashscreen(msg, effect) {
 
 function toggleSidebar() {
 	if (sidebar_mini) {
-		document.getElementById("mySidebar").style.width = "200px";
+		document.getElementById("sidebar").style.width = "200px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		for (var i = 0; i < icon_texts.length; i++) {
 			icon_texts[i].style.display = "initial";
@@ -249,7 +249,7 @@ function toggleSidebar() {
 		this.sidebar_mini = false;
 	} else {
 		// Note might wanna create a class for this and just add the class to the elements instead to clean up the code
-		document.getElementById("mySidebar").style.width = "60px";
+		document.getElementById("sidebar").style.width = "60px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		document.getElementById("main").style.marginLeft = "60px";
 		document.getElementById("navbar").style.marginLeft = "60px";
@@ -307,6 +307,8 @@ function fetchJSONdata() {
 }
 
 function appendContainer(id, container) {
+	var sidebar = document.getElementById("sidebar");
+	sidebar.style.minHeight = "100%";
 	var curContainer = document.getElementById(container);
 	var containers = document.getElementsByClassName("main-container");
 	for (var i = 0; i < containers.length; i++) {
