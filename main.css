@@ -15,8 +15,8 @@
 }
 
 .sidebar {
-  height: 100%;
-  width: 60px;
+  min-height: 100%;
+  min-width: 60px;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -198,6 +198,31 @@ main .sidebar {
   transition: margin-left 0.5s;
 }
 
+.body-text {
+	overflow-y: auto;
+  max-height: 33px;
+  /* Firefox */
+    scrollbar-width: thin; 
+  scrollbar-color: grey; 
+}
+
+.body-text, body::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.body-text, body::-webkit-scrollbar {
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+.body-text, body::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
+
 #settings-con, #theme-settings, #adv-settings, #about {
 	border-radius: 10px;
 }
@@ -356,28 +381,6 @@ body {
         width: 100%;
         height: 100%;
 }
-
-body::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-
-}
-
-body::-webkit-scrollbar
-{
-	width: 12px;
-
-}
-
-body::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
-	background-blend-mode: screen;
-}
-
 
 .dark_theme {
 
