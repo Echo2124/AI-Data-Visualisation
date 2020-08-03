@@ -194,7 +194,7 @@
                 "Amazon Echo",
                 "Apple Homepod"
                ],
-               "text":"Digital Assistants are heavily reliant on Artifical Intelligence in order to intepret and recognise the voice of the user.",
+               "text":"Digital Assistants are heavily reliant on Artifical Intelligence (AI) in order to intepret and recognise the voice of the user. As a consequence, most of the major Digital Assistants such as 'Google Assistant', 'Siri' (Apple) and 'Alexa' (Amazon) use AI. These assistants are available on many different devices such as TVs, Computers and Smartphones. There are also dedicated devices that house these technologies such as Google Home, Amazon Echo and Apple Homepod.",
                "datasets":[
                   {
                     "fill": true,
@@ -254,7 +254,7 @@
                  "Facebook",
                  "Instagram"
                ],
-               "text":"Whatever text for usages of Social Media",
+               "text":"These social media companies have a vested interest in the development of Artificial Intelligence (AI) as it allows them to offer a better and safer service. As an example Facebook usage AI in order to filter the media that is posted on the network in order to detect 'nudity, graphic violence, terrorism, hate speech, spam, fake accounts'.",
                "datasets":[
                   {
                     "fill": true,
