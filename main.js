@@ -21,7 +21,7 @@ var default_config = {
 	style: "dark", // options = dark, light
 	gradient: "default", // options = default...
 	loading_screen_anim: "particle", // options = polygonal, particle
-	night_mode: true
+	night_mode: false
 }
 // used as a simple cache for later uses of the data such as the node panels
 var dataCache;
@@ -119,16 +119,20 @@ function apply_settings(config) {
 		"bottom-credits"
 	];
 
+console.log("tester: " + config.style)
+
 	switch (config.style) {
 	case "dark":
 		for (var i = 0; i < panels.length; i++) {
 			document.getElementById(panels[i]).classList.add("dark_panels");
+
 		}
 		break;
-	case "white":
-		for (var i = 0; i < panels.length; i++) {
-			document.getElementById(panels[i]).classList.add("light_panels");
-		}
+	case "light":
+	for (var i = 0; i < panels.length; i++) {
+				document.getElementById(panels[i]).classList.add("light_panels");
+	}
+		break;
 	}
 
 	switch (config.gradient) {
@@ -246,9 +250,9 @@ function toggleSidebar() {
 			icon_texts[i].style.display = "initial";
 		}
 		document.getElementById("main").style.marginLeft = "200px";
+		document.getElementById("navbar").style.marginLeft = "200px";
 		this.sidebar_mini = false;
 	} else {
-		// Note might wanna create a class for this and just add the class to the elements instead to clean up the code
 		document.getElementById("sidebar").style.width = "60px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		document.getElementById("main").style.marginLeft = "60px";
@@ -440,7 +444,7 @@ console.log(data.chartData[0])
 				var table = document.getElementById("chart_table");
 				table.style.display = "none";
 				var graph = document.querySelector("#graphCol > canvas:nth-child(2)");
-				graph.style.display = "unset"
+				graph.style.display = ""
 				// might need to check if tab_1 is still selected in order to avoid running this unnecessarily
 			}, false)
 			tab_2.addEventListener("click", function() {
@@ -449,11 +453,12 @@ console.log(data.chartData[0])
 				var graph = document.querySelector("#graphCol > canvas:nth-child(2)")
 				console.log(graph)
 				graph.style.display = "none";
-				table.style.display = "unset";
+				table.style.display = "";
 				console.log("tab 2 hit")
 			}, false)
 			header.appendChild(tab_1);
 			header.appendChild(tab_2);
+
 			node_modal_Body.appendChild(header);
 		};
 
@@ -499,12 +504,12 @@ console.log(data.chartData[0])
 		}
 
 		function generateTable(id, data) {
+						var spacer = document.createElement("br");
 			var target = document.getElementById(id);
 			var table = document.createElement("table");
 			table.style.display = "none";
 			table.id = "chart_table";
 			table.classList.add("table");
-			
 			table.classList.add("table-dark");
 			var thead = document.createElement("thead");
 			var thead_tr = document.createElement("tr");
@@ -538,7 +543,7 @@ console.log(data.chartData[0])
 					tbody_td.innerText = data.contents[0].datasets[i].data[a];
 					tbody_tr.appendChild(tbody_td);
 				}
-				
+
 				// totals values
 				var tbody_td_total = document.createElement("td");
 				var tbody_tr_tds = tbody_tr.getElementsByTagName("td");
@@ -553,6 +558,7 @@ console.log(data.chartData[0])
 				tbody_tr.appendChild(tbody_td_total)
 				tbody.appendChild(tbody_tr);
 		}
+		target.appendChild(spacer.cloneNode(true))
 		thead.appendChild(thead_tr);
 		table.appendChild(thead);
 		table.appendChild(tbody);
