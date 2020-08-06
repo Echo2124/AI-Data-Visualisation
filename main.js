@@ -105,7 +105,7 @@ function writeCustomSettings() {
 }
 
 function apply_settings(config) {
-
+var select = document.getElementsByTagName("select");
 	// apply settings here
 	var panels = [
 		"navbar",
@@ -128,7 +128,11 @@ console.log("tester: " + config.style)
 	case "dark":
 		for (var i = 0; i < panels.length; i++) {
 			document.getElementById(panels[i]).classList.add("dark_panels");
+		}
 
+		for (var i = 0; i < select.length; i++) {
+			select[i].classList.add("text-light");
+			select[i].classList.add("bg-dark");
 		}
 		break;
 	case "light":
@@ -247,19 +251,19 @@ function splashscreen(msg, effect) {
 
 function toggleSidebar() {
 	if (sidebar_mini) {
-		document.getElementById("sidebar").style.width = "200px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		for (var i = 0; i < icon_texts.length; i++) {
 			icon_texts[i].style.display = "initial";
 		}
 		document.getElementById("main").style.marginLeft = "200px";
 		document.getElementById("navbar").style.marginLeft = "200px";
+		document.getElementById("sidebar").style.width = "200px";
 		this.sidebar_mini = false;
 	} else {
-		document.getElementById("sidebar").style.width = "60px";
 		var icon_texts = document.getElementsByClassName("icon-text");
 		document.getElementById("main").style.marginLeft = "60px";
 		document.getElementById("navbar").style.marginLeft = "60px";
+		document.getElementById("sidebar").style.width = "60px";
 		this.sidebar_mini = true;
 		for (var i = 0; i < icon_texts.length; i++) {
 			icon_texts[i].style.display = "none";
@@ -435,10 +439,12 @@ console.log(data.chartData[0])
 			tab_1.classList.add("btn");
 			tab_1.classList.add("btn-secondary");
 			tab_1.classList.add("active");
+			tab_1.id = "grp_graph";
 			tab_1.setAttribute("type", "button");
 			tab_1.innerText = "Graph";
 			var tab_2 = document.createElement("button");
 			tab_2.classList.add("btn");
+			tab_2.id = "grp_table";
 			tab_2.classList.add("btn-secondary");
 			tab_2.setAttribute("type", "button");
 			tab_2.innerText = "Table";
@@ -446,14 +452,14 @@ console.log(data.chartData[0])
 				// add table here
 				var table = document.getElementById("chart_table");
 				table.style.display = "none";
-				var graph = document.querySelector("#graphCol > canvas:nth-child(2)");
+	var graph = document.getElementById("graph_canvas_node");
 				graph.style.display = ""
 				// might need to check if tab_1 is still selected in order to avoid running this unnecessarily
 			}, false)
 			tab_2.addEventListener("click", function() {
 				// add table here
 				var table = document.getElementById("chart_table");
-				var graph = document.querySelector("#graphCol > canvas:nth-child(2)")
+				var graph = document.getElementById("graph_canvas_node");
 				console.log(graph)
 				graph.style.display = "none";
 				table.style.display = "";
@@ -507,11 +513,42 @@ console.log(data.chartData[0])
 		}
 
 		function generateTable(id, data) {
-						var spacer = document.createElement("br");
+			var dynamic = true;
+			var parent = document.createElement("div");
+			parent.id = "chart_table"
 			var target = document.getElementById(id);
+			console.log(data)
+			console.log(data.contents[0].datasets.length)
+			if (dynamic == true) {
+				// data restructure
+				var dataset = [];
+				var rowheaders = [];
+				for (var i = 0; i < data.contents[0].datasets.length; i++) {
+					dataset.push(data.contents[0].datasets[i].data);
+					rowheaders.push(data.contents[0].datasets[i].label);
+				}
+				console.log(dataset)
+				var colheaders = data.contents[0].labels;
+				table_settings = {
+					data: data.contents,
+					colHeaders: true,
+					licenseKey: 'non-commercial-and-evaluation'
+				}
+				hot = new Handsontable(parent, {
+					data: dataset,
+					rowHeaders: rowheaders,
+					colHeaders: colheaders,
+					readOnly: true,
+					autoColumnSize: true,
+					licenseKey: 'non-commercial-and-evaluation',
+					fillHandle: {
+						autoInsertRow: false,
+					}
+});
+			} else {
+						var spacer = document.createElement("br");
 			var table = document.createElement("table");
 			table.style.display = "none";
-			table.id = "chart_table";
 			table.classList.add("table");
 			table.classList.add("table-dark");
 			var thead = document.createElement("thead");
@@ -565,7 +602,9 @@ console.log(data.chartData[0])
 		thead.appendChild(thead_tr);
 		table.appendChild(thead);
 		table.appendChild(tbody);
-		target.appendChild(table)
+		parent.appendChild(table);
+}
+target.appendChild(parent);
 }
 }
 
@@ -589,8 +628,10 @@ function generateChart(nodeName, chart, type) {
 		if (type !== "node-panel") {
 			display_state = false;
 			title = chart.category;
+			currentNode.id = "graph_canvas";
 		} else {
 			display_state = true;
+			currentNode.id = "graph_canvas_node";
 			if (chart.question !== "") {
 			title = chart.question;
 		} else {

@@ -38,8 +38,14 @@
 }
 
 .settings-container {
-  border: 1px solid white;
+  border: 1px solid grey;
 }
+
+.dropdown_dark {
+  background-color: rgb(50,50,50);
+  color: lightgrey;
+}
+
 
 .modal-content {
   height: 100%;
