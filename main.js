@@ -31,6 +31,9 @@ function init() {
 	var cookies = document.cookie;
 	var cookies_state;
 	console.log("Cookies: " + cookies)
+	// calling function twice to reset sidebar
+	toggleSidebar();
+	toggleSidebar();
 	if (cookies == "null" || cookies == "" || cookies == null) {
 		splashscreen("First time setup! Initialising...", default_config.loading_screen_anim)
 		append_settings(default_config);
