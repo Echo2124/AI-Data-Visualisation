@@ -153,13 +153,13 @@ console.log("tester: " + config.style)
 	document.getElementsByTagName("body")[0].classList.add("default_gradient_anim");
 	document.getElementById("splashscreen").classList.add("default_gradient_anim");
 	break;
-	case "sunset":
-	document.getElementsByTagName("body")[0].classList.add("sunset_gradient");
-	document.getElementById("splashscreen").classList.add("sunset_gradient");
+	case "purple_bliss":
+	document.getElementsByTagName("body")[0].classList.add("purple_bliss_gradient");
+	document.getElementById("splashscreen").classList.add("purple_bliss_gradient");
 	break;
-	case "sunset_anim":
-		document.getElementsByTagName("body")[0].classList.add("sunset_gradient_anim");
-		document.getElementById("splashscreen").classList.add("sunset_gradient_anim");
+	case "purple_bliss_anim":
+		document.getElementsByTagName("body")[0].classList.add("purple_bliss_gradient_anim");
+		document.getElementById("splashscreen").classList.add("purple_bliss_gradient_anim");
 	}
 	if (config.night_mode == true) {
 		var offset = 0; // offset value (for testing)
@@ -379,35 +379,35 @@ console.log(data.chartData[0])
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[0].category;
 					generateChart("graphCol", data.chartData[0], "node-panel");
-					generateTable("graphCol", data.chartData[0]);
+					generateTable("table_parent", data.chartData[0]);
 					appendText(NodeID, "textCol", data.chartData[0]);
 					break;
 				case "chart-node-2":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[1].category;
 					generateChart("graphCol", data.chartData[1], "node-panel");
-					generateTable("graphCol", data.chartData[1]);
+					generateTable("table_parent", data.chartData[1]);
 					appendText(NodeID, "textCol", data.chartData[1]);
 					break;
 				case "chart-node-3":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[2].category;
 					generateChart("graphCol", data.chartData[2], "node-panel");
-					generateTable("graphCol", data.chartData[2]);
+					generateTable("table_parent", data.chartData[2]);
 					appendText(NodeID, "textCol", data.chartData[2])
 					break;
 				case "chart-node-4":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[3].category;
 					generateChart("graphCol", data.chartData[3], "node-panel");
-					generateTable("graphCol", data.chartData[3]);
+					generateTable("table_parent", data.chartData[3]);
 					appendText(NodeID, "textCol", data.chartData[3])
 					break;
 				case "chart-node-5":
 					setupMdl()
 					node_modal_Title.innerText = data.chartData[4].category;
 					generateChart("graphCol", data.chartData[4], "node-panel");
-					generateTable("graphCol", data.chartData[4]);
+					generateTable("table_parent", data.chartData[4]);
 					appendText(NodeID, "textCol", data.chartData[4])
 				}
 
@@ -450,7 +450,7 @@ console.log(data.chartData[0])
 			tab_2.innerText = "Table";
 			tab_1.addEventListener("click", function() {
 				// add table here
-				var table = document.getElementById("chart_table");
+				var table = document.getElementById("table_parent");
 				table.style.display = "none";
 	var graph = document.getElementById("graph_canvas_node");
 				graph.style.display = ""
@@ -458,7 +458,7 @@ console.log(data.chartData[0])
 			}, false)
 			tab_2.addEventListener("click", function() {
 				// add table here
-				var table = document.getElementById("chart_table");
+				var table = document.getElementById("table_parent");
 				var graph = document.getElementById("graph_canvas_node");
 				console.log(graph)
 				graph.style.display = "none";
@@ -498,13 +498,20 @@ console.log(data.chartData[0])
 			var thirdCol = document.createElement("div");
 			var infoTitle = document.createElement("h3");
 			var divider = document.createElement("hr");
+			var table_parent = document.createElement("div");
+			table_parent.style.minHeight = "100%"
+			table_parent.style.minWidth = "100%"
+			table_parent.style.overflow = "hidden";
+			table_parent.style.display = "none";
+			table_parent.id = "table_parent";
 			divider.id = "mdl-h-divider";
 			infoTitle.innerText = "Information";
 			thirdCol.classList.add("col-3");
 			thirdCol.classList.add("col-md-3")
 			thirdCol.id = "textCol";
 			thirdCol.appendChild(infoTitle);
-			thirdCol.appendChild(divider)
+			thirdCol.appendChild(divider);
+			firstCol.appendChild(table_parent);
 			row.appendChild(firstCol);
 			row.appendChild(secondCol);
 			row.appendChild(thirdCol);
@@ -514,8 +521,7 @@ console.log(data.chartData[0])
 
 		function generateTable(id, data) {
 			var dynamic = true;
-			var parent = document.createElement("div");
-			parent.id = "chart_table"
+			var spacer = document.createElement("br");
 			var target = document.getElementById(id);
 			console.log(data)
 			console.log(data.contents[0].datasets.length)
@@ -528,25 +534,28 @@ console.log(data.chartData[0])
 					rowheaders.push(data.contents[0].datasets[i].label);
 				}
 				console.log(dataset)
+					target.appendChild(spacer.cloneNode(true))
 				var colheaders = data.contents[0].labels;
-				table_settings = {
-					data: data.contents,
-					colHeaders: true,
-					licenseKey: 'non-commercial-and-evaluation'
-				}
-				hot = new Handsontable(parent, {
+				hot = new Handsontable(target, {
 					data: dataset,
 					rowHeaders: rowheaders,
 					colHeaders: colheaders,
-					readOnly: true,
-					autoColumnSize: true,
+					stretchH:"all",
 					licenseKey: 'non-commercial-and-evaluation',
 					fillHandle: {
 						autoInsertRow: false,
-					}
+					},
+					beforeChange: function(changes, src) {
+						var graph_canvas = document.getElementById("graph_canvas_node");
+
+						if (src !== 'loadData') {
+							changes.forEach((change) => {
+							graph_canvas.update();
+		});
+	}
+}
 });
 			} else {
-						var spacer = document.createElement("br");
 			var table = document.createElement("table");
 			table.style.display = "none";
 			table.classList.add("table");
@@ -603,8 +612,9 @@ console.log(data.chartData[0])
 		table.appendChild(thead);
 		table.appendChild(tbody);
 		parent.appendChild(table);
+		target.appendChild(parent);
 }
-target.appendChild(parent);
+
 }
 }
 
@@ -615,7 +625,7 @@ function generateChart(nodeName, chart, type) {
 	var targetNode = document.getElementById(nodeName);
 	var currentNode = document.createElement("canvas");
 	currentNode.classList.add("node-graph");
-	//currentNode.responsive = true;
+	currentNode.responsive = true;
 	var ctx = currentNode.getContext('2d');
 	var data = chart.contents[0].datasets.map(function (j) {
 		return j
@@ -632,6 +642,7 @@ function generateChart(nodeName, chart, type) {
 		} else {
 			display_state = true;
 			currentNode.id = "graph_canvas_node";
+
 			if (chart.question !== "") {
 			title = chart.question;
 		} else {
@@ -661,7 +672,6 @@ legend: {
 			fontSize: 18
         }
     }
-		// Configuration options go here
 	}
 
 	Chart.defaults.global.defaultFontFamily = "Quicksand"
