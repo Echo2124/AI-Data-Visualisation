@@ -542,7 +542,7 @@ console.log(data.chartData[0])
 					rowheaders.push(data.contents[0].datasets[i].label);
 				}
 				console.log(dataset)
-					target.appendChild(spacer.cloneNode(true))
+					$(target).prepend(spacer.cloneNode(true))
 					target.appendChild(note);
 				var colheaders = data.contents[0].labels;
 			var	hot = new Handsontable(target, {
