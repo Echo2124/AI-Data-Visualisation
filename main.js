@@ -21,7 +21,8 @@ var default_config = {
 	style: "dark", // options = dark, light
 	gradient: "default", // options = default...
 	loading_screen_anim: "particle", // options = polygonal, particle
-	night_mode: false
+	night_mode: false,
+	table_type: "dynamic"
 }
 // used as a simple cache for later uses of the data such as the node panels
 var dataCache;
@@ -84,6 +85,7 @@ function append_settings(config) {
 	document.getElementById("gradient").value = config.gradient;
 	document.getElementById("load_screen").value = config.loading_screen_anim;
 	document.getElementById("night_mode").checked = config.night_mode;
+	document.getElementById("table_type").value = config.table_type;
 	apply_settings(config);
 }
 
@@ -93,11 +95,13 @@ function writeCustomSettings() {
   var opt_gradient = document.getElementById("gradient").value;
   var opt_load = document.getElementById("load_screen").value;
   var opt_night_mode = document.getElementById("night_mode").checked;
+	var opt_table_type = document.getElementById("table_type").value;
   var config_object = {
     "style":opt_themes,
     "gradient":opt_gradient,
     "loading_screen_anim": opt_load,
-    "night_mode": opt_night_mode
+    "night_mode": opt_night_mode,
+		"table_type": opt_table_type
   };
   var cur = new Date();
   cur.setFullYear(cur.getFullYear() + 1);
@@ -123,7 +127,6 @@ var select = document.getElementsByTagName("select");
 		"bottom-credits"
 	];
 
-console.log("tester: " + config.style)
 
 	switch (config.style) {
 	case "dark":
@@ -369,6 +372,7 @@ function generateNodePanelInfo(NodeID) {
 	console.log("Generate panel")
 	console.log("THis is node id" + NodeID)
 	var data = dataCache;
+	var table_type = document.getElementById("table_type").value
 	// check if there is any cached local data
 	var node_modal_Title = document.getElementsByClassName("modal-title")[0];
 	var node_modal_Body = document.getElementsByClassName("modal-body")[0];
@@ -380,35 +384,35 @@ console.log(data.chartData[0])
 					setupMdl(data.chartData[0])
 					node_modal_Title.innerText = data.chartData[0].category;
 					generateChart("graphCol", data.chartData[0], "node-panel");
-					generateTable("table_parent", data.chartData[0]);
+					generateTable("table_parent", data.chartData[0], table_type);
 					appendText(NodeID, "textCol", data.chartData[0]);
 					break;
 				case "chart-node-2":
 					setupMdl(data.chartData[1])
 					node_modal_Title.innerText = data.chartData[1].category;
 					generateChart("graphCol", data.chartData[1], "node-panel");
-					generateTable("table_parent", data.chartData[1]);
+					generateTable("table_parent", data.chartData[1], table_type);
 					appendText(NodeID, "textCol", data.chartData[1]);
 					break;
 				case "chart-node-3":
-					setupMdldata.chartData[2]()
+					setupMdl(data.chartData[2])
 					node_modal_Title.innerText = data.chartData[2].category;
 					generateChart("graphCol", data.chartData[2], "node-panel");
-					generateTable("table_parent", data.chartData[2]);
+					generateTable("table_parent", data.chartData[2], table_type);
 					appendText(NodeID, "textCol", data.chartData[2])
 					break;
 				case "chart-node-4":
 					setupMdl(data.chartData[3])
 					node_modal_Title.innerText = data.chartData[3].category;
 					generateChart("graphCol", data.chartData[3], "node-panel");
-					generateTable("table_parent", data.chartData[3]);
+					generateTable("table_parent", data.chartData[3], table_type);
 					appendText(NodeID, "textCol", data.chartData[3])
 					break;
 				case "chart-node-5":
 					setupMdl(data.chartData[4])
 					node_modal_Title.innerText = data.chartData[4].category;
 					generateChart("graphCol", data.chartData[4], "node-panel");
-					generateTable("table_parent", data.chartData[4]);
+					generateTable("table_parent", data.chartData[4], table_type);
 					appendText(NodeID, "textCol", data.chartData[4])
 				}
 
@@ -522,15 +526,14 @@ console.log(data.chartData[0])
 			node_modal_Body.appendChild(container);
 		}
 
-		function generateTable(id, data) {
-			var dynamic = true;
+		function generateTable(id, data, type) {
 			var spacer = document.createElement("br");
 			var note = document.createElement("sup");
 			note.innerText = "(Note: Changes will only apply for this session. When you refresh the page, the data will go back to defaults)"
 			var target = document.getElementById(id);
 			console.log(data)
 			console.log(data.contents[0].datasets.length)
-			if (dynamic == true) {
+			if (type == "dynamic") {
 				// data restructure
 				var dataset = [];
 				var rowheaders = [];
@@ -577,9 +580,9 @@ setTimeout(function() {
 hot.render();
 			} else {
 			var table = document.createElement("table");
-			table.style.display = "none";
 			table.classList.add("table");
 			table.classList.add("table-dark");
+			table.classList.add("static-table");
 			var thead = document.createElement("thead");
 			var thead_tr = document.createElement("tr");
 			var tbody = document.createElement("tbody");
@@ -609,12 +612,14 @@ hot.render();
 				// handles individual data
 				for (var a = 0; a < data.contents[0].datasets[i].data.length; a++) {
 					var tbody_td = document.createElement("td");
+					tbody_td.classList.add("static-table");
 					tbody_td.innerText = data.contents[0].datasets[i].data[a];
 					tbody_tr.appendChild(tbody_td);
 				}
 
 				// totals values
 				var tbody_td_total = document.createElement("td");
+				tbody_td_total.classList.add("static-table");
 				var tbody_tr_tds = tbody_tr.getElementsByTagName("td");
 				var total = 0;
 				$(tbody_tr_tds).each(function() {
@@ -631,8 +636,7 @@ hot.render();
 		thead.appendChild(thead_tr);
 		table.appendChild(thead);
 		table.appendChild(tbody);
-		parent.appendChild(table);
-		target.appendChild(parent);
+		target.appendChild(table);
 }
 
 }
