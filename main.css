@@ -50,6 +50,9 @@
   overflow: hidden;
 }
 
+td {
+  color: black;
+}
 
 .modal-content {
   height: 100%;
