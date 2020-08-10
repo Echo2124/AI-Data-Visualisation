@@ -41,6 +41,10 @@
     max-height: 80%;
 }
 
+.first-init-content {
+  min-width: fit-content;
+}
+
 .settings-container {
   border: 1px solid grey;
 }
@@ -57,6 +61,7 @@
 td {
   color: black;
 }
+
 
 .modal-content {
   height: 100%;

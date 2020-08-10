@@ -18,6 +18,7 @@ might to create a single function to retreive json information instead of using 
 // Global Vars
 var sidebar_mini = true;
 var default_config = {
+	initialised: false,
 	style: "dark", // options = dark, light
 	gradient: "default", // options = default...
 	loading_screen_anim: "particle", // options = polygonal, particle
@@ -35,11 +36,13 @@ function init() {
 	console.log("Cookies: " + cookies)
 	// calling function twice to reset sidebar
 	toggleSidebar();
+
 	toggleSidebar();
 	if (cookies == "null" || cookies == "" || cookies == null) {
 		splashscreen("First time setup! Initialising...", default_config.loading_screen_anim)
 		append_settings(default_config);
 		cookies_state = false;
+		$("#first-init").modal('show');
 	} else {
     splashscreen("Loading...", fetchCustomSettings("settings").loading_screen_anim)
 		append_settings(fetchCustomSettings("settings"));
@@ -62,6 +65,7 @@ function init() {
 		}
 		appendContainer("sidebar-Home", "container-overview");
 	}, false)
+	writeCustomSettings(false);
 	prepNodePanels();
 	document.getElementById("apply").addEventListener("click", writeCustomSettings, false);
 };
@@ -89,7 +93,7 @@ function append_settings(config) {
 	apply_settings(config);
 }
 
-function writeCustomSettings() {
+function writeCustomSettings(reload) {
   console.log("Writing Custom Settings...");
   var opt_themes = document.getElementById("themes").value;
   var opt_gradient = document.getElementById("gradient").value;
@@ -97,6 +101,7 @@ function writeCustomSettings() {
   var opt_night_mode = document.getElementById("night_mode").checked;
 	var opt_table_type = document.getElementById("table_type").value;
   var config_object = {
+		"initialised": true,
     "style":opt_themes,
     "gradient":opt_gradient,
     "loading_screen_anim": opt_load,
@@ -106,7 +111,9 @@ function writeCustomSettings() {
   var cur = new Date();
   cur.setFullYear(cur.getFullYear() + 1);
   document.cookie = "settings=" + JSON.stringify(config_object) + ";" + "expires=" + cur.toUTCString();
+	if (reload !== false) {
   location.reload();
+}
 }
 
 function apply_settings(config) {
