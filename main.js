@@ -145,6 +145,14 @@ var select = document.getElementsByTagName("select");
 			select[i].classList.add("text-light");
 			select[i].classList.add("bg-dark");
 		}
+		var table_css = document.createElement("style");
+		table_css.innerHTML =
+			".handsontable th, .handsontable td {" +
+			"color: #f7f7f7 !important;" +
+			"background-color: 	#383838 !important" +
+			"}";
+		var reference = document.querySelector("script");
+		reference.parentNode.insertBefore(table_css, reference);
 		break;
 	case "light":
 	for (var i = 0; i < panels.length; i++) {
@@ -521,6 +529,7 @@ console.log(data.chartData[0])
 			divider.id = "mdl-h-divider";
 			infoTitle.innerText = "Information";
 			thirdCol.classList.add("col-3");
+			thirdCol.classList.add("text-white");
 			thirdCol.classList.add("col-md-3")
 			thirdCol.id = "textCol";
 			thirdCol.appendChild(infoTitle);
@@ -534,7 +543,6 @@ console.log(data.chartData[0])
 		}
 
 		function generateTable(id, data, type) {
-			var spacer = document.createElement("br");
 			var note = document.createElement("sup");
 			note.innerText = "(Note: Changes will only apply for this session. When you refresh the page, the data will go back to defaults)"
 			var target = document.getElementById(id);
@@ -549,19 +557,28 @@ console.log(data.chartData[0])
 					rowheaders.push(data.contents[0].datasets[i].label);
 				}
 				console.log(dataset)
-					$(target).prepend(spacer.cloneNode(true))
+					$("<br>").insertBefore(target);
 					target.appendChild(note);
+
+
 				var colheaders = data.contents[0].labels;
 			var	hot = new Handsontable(target, {
 					data: dataset,
 					rowHeaders: rowheaders,
 					colHeaders: colheaders,
 					stretchH:"all",
-					colWidths: [20,20,20],
+					colWidths: 20,
+					rowHeights: 50,
+					rowHeaderWidth: 350,
 					licenseKey: 'non-commercial-and-evaluation',
-					readOnly: true,
+					allowInsertColumn: false,
+					allowInsertRow: false,
 					manualColumnResize: true,
 manualRowResize: true,
+defaultRowHeight: 200,
+maxCols: 20,
+maxRows: 6,
+height: 500,
 					beforeChange: function(changes, src) {
 						console.log("triggered changed")
 						if (src !== 'loadData') {
@@ -578,12 +595,6 @@ manualRowResize: true,
 }
 
 });
-setTimeout(function() {
-	hot.updateSettings({
-		rowHeaderWidth: 350,
-		readOnly: false
-	})
-}, 200)
 hot.render();
 			} else {
 			var table = document.createElement("table");
