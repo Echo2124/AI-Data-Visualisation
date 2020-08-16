@@ -1,20 +1,5 @@
 // AI Data Visualisation. Created by Josh S 2020.
 
-/*
-Purpose: This handles most of the functionality behind the website
-Current state: this code is mostly functional however it is not neat.
-Meaning that a rewrite of specific areas could be needed in order to make it run more smoothly.
-
-More important notes:
-Create a backup of current dependecies in local repository if remote ones are unable to be accessed
-might to create a single function to retreive json information instead of using two in order to streamline code.
-*/
-
-/* candidate chart colours
-
-#E05759,#4D89CA,#149B51,#D66A31
-*/
-
 // Global Vars
 var sidebar_mini = true;
 var default_config = {
@@ -543,8 +528,10 @@ console.log(data.chartData[0])
 		}
 
 		function generateTable(id, data, type) {
+			var spacer = document.createElement("br");
 			var note = document.createElement("sup");
 			note.innerText = "(Note: Changes will only apply for this session. When you refresh the page, the data will go back to defaults)"
+			note.classList.add("text-white");
 			var target = document.getElementById(id);
 			console.log(data)
 			console.log(data.contents[0].datasets.length)
@@ -557,8 +544,9 @@ console.log(data.chartData[0])
 					rowheaders.push(data.contents[0].datasets[i].label);
 				}
 				console.log(dataset)
-					$("<br>").insertBefore(target);
-					target.appendChild(note);
+
+				$("<br>").insertBefore(target);
+	$(note).insertBefore(target);
 
 
 				var colheaders = data.contents[0].labels;
@@ -578,7 +566,8 @@ manualRowResize: true,
 defaultRowHeight: 200,
 maxCols: 20,
 maxRows: 6,
-height: 500,
+height: 450,
+type: "numeric",
 					beforeChange: function(changes, src) {
 						console.log("triggered changed")
 						if (src !== 'loadData') {
@@ -596,6 +585,11 @@ height: 500,
 
 });
 hot.render();
+Handsontable.hooks.add('afterValidate', function(result) {
+	if(result !== true){
+	 alert('A value entered into the table is not supported. Numerical values are only accepted');
+	}
+});
 			} else {
 			var table = document.createElement("table");
 			table.classList.add("table");
