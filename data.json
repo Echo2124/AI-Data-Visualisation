@@ -14,8 +14,8 @@
                "datasets":[
                   {
                      "label":"Used online customer chat service",
-                     "backgroundColor":"#EB7564",
-                     "borderColor":"#EB7564",
+                     "backgroundColor":"#58508d",
+                     "borderColor":"#58508d",
                      "borderWidth":1,
                      "data":[
                         35,
@@ -24,8 +24,8 @@
                   },
                   {
                      "label":"Played a video game against an NPC",
-                     "backgroundColor":"#25B2D1",
-                     "borderColor":"#25B2D1",
+                     "backgroundColor":"#ff6361",
+                     "borderColor":"#ff6361",
                      "borderWidth":1,
                      "data":[
                         51,
@@ -73,8 +73,8 @@
                "datasets":[
                   {
                      "label":"Victim of Financial Fraud",
-                     "backgroundColor":"#EB7564",
-                     "borderColor":"#EB7564",
+                     "backgroundColor":"#58508d",
+                     "borderColor":"#58508d",
                      "borderWidth":1,
                      "data":[
                         8,
@@ -83,8 +83,8 @@
                   },
                   {
                      "label":"Shopped online using Amazon",
-                     "backgroundColor":"#E47AA7",
-                     "borderColor":"#E47AA7",
+                     "backgroundColor":"#bc5090",
+                     "borderColor":"#bc5090",
                      "borderWidth":1,
                      "data":[
                         37,
@@ -93,8 +93,8 @@
                   },
                   {
                      "label":"Use online banking",
-                     "backgroundColor":"#25B2D1",
-                     "borderColor":"#25B2D1",
+                     "backgroundColor":"#ff6361",
+                     "borderColor":"#ff6361",
                      "borderWidth":1,
                      "data":[
                         47,
@@ -143,12 +143,12 @@
                   {
                     "fill": true,
                      "backgroundColor":[
-                       "#EB7564",
-                       "#25B2D1"
+                       "#58508d",
+                       "#ff6361"
                      ],
                      "borderColor":[
-                       "#EB7564",
-                       "#25B2D1"
+                       "#58508d",
+                       "#ff6361"
                      ],
                      "label":"Dataset",
                      "data":[
@@ -199,14 +199,14 @@
                   {
                     "fill": true,
                      "backgroundColor":[
-                       "#EB7564",
-                       "#E47AA7",
-                       "#25B2D1"
+                       "#58508d",
+                       "#bc5090",
+                       "#ff6361"
                      ],
                      "borderColor":[
-                       "#EB7564",
-                       "#E47AA7",
-                       "#25B2D1"
+                       "#58508d",
+                       "#bc5090",
+                       "#ff6361"
                      ],
                      "label":"Dataset",
                      "data":[
@@ -259,16 +259,16 @@
                   {
                     "fill": true,
                      "backgroundColor":[
-                       "#EB7564",
-                       "#E47AA7",
-                       "#A099D6",
-                       "#25B2D1"
+                       "#58508d",
+                       "#bc5090",
+                       "#ffa600",
+                       "#ff6361"
                      ],
                      "borderColor":[
-                       "#EB7564",
-                       "#E47AA7",
-                       "#A099D6",
-                       "#25B2D1"
+                       "#58508d",
+                       "#bc5090",
+                       "#ffa600",
+                       "#ff6361"
                      ],
                      "label":"Dataset",
                      "data":[
